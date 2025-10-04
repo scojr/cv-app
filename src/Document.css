@@ -1,19 +1,20 @@
 .document {
+  --accent-color: #5f8fbb;
   aspect-ratio: 1 / 1.284;
   height: 100vh;
   width: min-content;
   background-color: white;
 
   display: grid;
-  grid-template-columns: 33% 1fr;
+  grid-template-columns: max-content 1fr;
   gap: 1rem;
-  padding: 1rem;
 
 }
 
 aside {
-  border-right: 1px solid black;
-  padding-right: 1rem;
+  padding: 2rem;
+  background-color: var(--accent-color);
+  color: white;
 
   section {
     margin-bottom: 1rem;
@@ -22,27 +23,36 @@ aside {
       font-size: 1.4rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
+      margin-top: 2rem;
     }
 
     ul {
       list-style: initial;
 
       li {
-        margin-left: 1rem;
+        margin: 0.5rem 1rem;
       }
     }
+  }
+
+  .separator {
+    border-bottom: 1px solid white;
   }
 }
 
 main {
+  padding: 1rem;
+
   header {
     h1 {
-      font-size: 4rem;
+      font-size: 3.4rem;
     }
 
     h2 {
       font-size: 1.6rem;
     }
+
+    margin-bottom: 3rem;
   }
 
   section {
@@ -54,11 +64,23 @@ main {
       margin-bottom: 0.5rem;
     }
   }
+
+  .separator {
+    border-bottom: 1px solid black;
+  }
 }
 
 .avatar {
   aspect-ratio: 1/1;
   border-radius: 100%;
   background-color: grey;
-  margin: 1rem;
+  background-image: url('./assets/avatar-placeholder.jpg');
+  background-position: center;
+  background-size: contain;
+  border: 0.25rem solid white;
+  margin-bottom: 2rem;
+}
+
+.separator {
+  margin-bottom: 0.5rem;
 }

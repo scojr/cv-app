@@ -1,46 +1,46 @@
 import './Document.css'
 
+const user = {
+  name: 'John Doe',
+  occupation: 'Web Developer',
+  profile: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus saepe vitae, beatae dolorum, perferendis quae unde minus consectetur cumque aliquid quaerat molestias! Minus, similique odio vel magni tenetur quam fugiat.'
+}
+
 export default function Document() {
   return (
     <div className="document">
       <aside>
         <div className="avatar"></div>
-        <section className="contact">
-          <h3>Contact</h3>
-          <ul>
-            <li>123-555-1234</li>
-            <li>me@email.com</li>
-            <li>123 Address St. City, State</li>
-            <li>www.theodinproject.com</li></ul>
-        </section>
-        <section className="skills">
-          <h3>Skills</h3>
-          <ul>
-            <li>Juggling</li>
-            <li>Ventriloquism</li>
-            <li>Magic Tricks</li>
-          </ul>
-        </section>
+        <Section heading='Contact' array={['123-555-1234', 'me@email.com', '123 Address St. City, State', 'www.theodinproject.com']}></Section>
+        <Section heading="Skills" array={[1, 2, 3]} ></Section>
       </aside>
       <main>
         <header>
-          <h1 className="client-name">John Doe</h1>
-          <h2 className="occupation-title">Occupation</h2>
+          <h1 className="client-name">{user.name}</h1>
+          <h2 className="occupation-title">{user.occupation}</h2>
         </header>
-        <section className="profile">
-          <h3 >Profile</h3>
-          <p >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus saepe vitae, beatae dolorum, perferendis quae unde minus consectetur cumque aliquid quaerat molestias! Minus, similique odio vel magni tenetur quam fugiat.</p>
-        </section>
-        <section className="experience">
-          <h3>Experience</h3>
-        </section>
-        <section className="education">
-          <h3>Education</h3>
-        </section>
-        <section className="References">
-          <h3>References</h3>
-        </section>
+        <Section heading='Profile' text={user.profile}></Section>
+        <Section heading='Experience'></Section>
+        <Section heading='Education'></Section>
+        <Section heading='References'></Section>
       </main>
     </div>
+  )
+}
+
+function Section({ heading, text, array }) {
+  const textContent = text ? <p>{text}</p> : null;
+  let list = null;
+  if (array) {
+    const arrayList = array.map((item) => <li key={item}>{item}</li>)
+    list = <ul>{arrayList}</ul>
+  }
+  return (
+    <section>
+      <h3>{heading}</h3>
+      <div className="separator"></div>
+      {textContent}
+      {list}
+    </section>
   )
 }
