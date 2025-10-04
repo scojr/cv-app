@@ -6,3 +6,10 @@ export default function Sidebar() {
     </div>
   )
 }
+
+function Panel() {
+  return (
+    <div className="panel">
+    </div>
+  )
+}

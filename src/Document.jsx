@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Document.css'
 
 const user = {
@@ -29,18 +30,33 @@ export default function Document() {
 }
 
 function Section({ heading, text, array }) {
+  const [isControls, setIsControls] = useState(false);
+
   const textContent = text ? <p>{text}</p> : null;
+  let controls = isControls ? <SectionButtons></SectionButtons> : null;
   let list = null;
   if (array) {
     const arrayList = array.map((item) => <li key={item}>{item}</li>)
     list = <ul>{arrayList}</ul>
   }
   return (
-    <section>
+    <section
+      onMouseEnter={() => setIsControls(true)}
+      onMouseLeave={() => setIsControls(false)}>
       <h3>{heading}</h3>
       <div className="separator"></div>
       {textContent}
       {list}
+      {controls}
     </section>
+  )
+}
+
+function SectionButtons() {
+  return (
+    <div className="edit-buttons">
+      <button className="edit"></button>
+      <button className="delete"></button>
+    </div>
   )
 }

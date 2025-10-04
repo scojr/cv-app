@@ -8,7 +8,6 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 1rem;
-
 }
 
 aside {
@@ -83,4 +82,82 @@ main {
 
 .separator {
   margin-bottom: 0.5rem;
+}
+
+section,
+header {
+  position: relative;
+}
+
+section:hover::after {
+  position: absolute;
+  width: calc(100% + 1rem);
+  height: calc(100% + 1rem);
+  top: -0.5rem;
+  left: -0.5rem;
+  content: '';
+  border: 2px dashed black;
+  border-radius: 0.5rem;
+}
+
+.edit-buttons {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  gap: .5rem;
+  top: 0rem;
+  right: 0rem;
+
+  button {
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    border: 1px solid darkgray;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  }
+
+  .edit {
+    background-image: url('./assets/edit.svg');
+
+    &:hover {
+      background-color: gainsboro;
+
+      &::after {
+        content: "Edit Entry";
+        color: black;
+      }
+    }
+  }
+
+  .delete {
+    background-image: url('./assets/trash.svg');
+
+    &:hover {
+      background-color: IndianRed;
+
+      border: 1px solid gray;
+
+      &::after {
+        content: "Delete Entry";
+        color: black;
+      }
+    }
+  }
+}
+
+.edit::after,
+.delete::after {
+  position: absolute;
+  top: -2.5rem;
+  right: -0.5rem;
+  white-space: nowrap;
+  background-color: white;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid darkgray;
 }
