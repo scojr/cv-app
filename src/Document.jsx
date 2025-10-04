@@ -30,20 +30,20 @@ export default function Document() {
 }
 
 function Section({ heading, text, array }) {
+  const [sectionData, setSectionData] = useState({ heading, text, array });
   const [isControls, setIsControls] = useState(false);
-
-  const textContent = text ? <p>{text}</p> : null;
-  let controls = isControls ? <SectionButtons></SectionButtons> : null;
+  const textContent = sectionData.text ? <p>{sectionData.text}</p> : null;
+  let controls = isControls ? <SectionButtons data={sectionData}></SectionButtons> : null;
   let list = null;
-  if (array) {
-    const arrayList = array.map((item) => <li key={item}>{item}</li>)
+  if (sectionData.array) {
+    const arrayList = sectionData.array.map((item) => <li key={item}>{item}</li>)
     list = <ul>{arrayList}</ul>
   }
   return (
     <section
       onMouseEnter={() => setIsControls(true)}
       onMouseLeave={() => setIsControls(false)}>
-      <h3>{heading}</h3>
+      <h3>{sectionData.heading}</h3>
       <div className="separator"></div>
       {textContent}
       {list}
@@ -52,11 +52,12 @@ function Section({ heading, text, array }) {
   )
 }
 
-function SectionButtons() {
+function SectionButtons({ data }) {
+  const parentData = data;
   return (
     <div className="edit-buttons">
-      <button className="edit"></button>
-      <button className="delete"></button>
-    </div>
+      <button className="edit" onClick={(e) => console.log(parentData)}></button>
+      <button className="delete" onClick={(e) => console.log(e)}></button>
+    </div >
   )
 }
