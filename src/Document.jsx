@@ -56,8 +56,8 @@ function SectionButtons({ data }) {
   const parentData = data;
   return (
     <div className="edit-buttons">
-      <button className="edit" onClick={(e) => console.log(parentData)}></button>
-      <button className="delete" onClick={(e) => console.log(e)}></button>
+      <button className="edit" onClick={() => console.log(parentData)}></button>
+      <button className="delete" onClick={() => console.log()}></button>
     </div >
   )
 }

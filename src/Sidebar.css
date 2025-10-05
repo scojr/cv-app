@@ -1,3 +1,28 @@
 .sidebar {
-  background-color: purple;
+  background-color: white;
+  width: 30%;
+  border-radius: 0.5rem;
+  height: calc(100vh - 4rem);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  header {
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: snow;
+    border-bottom: 1px solid lightgray;
+
+    button {
+      background-image: url('./assets/swap-horizontal.svg');
+      width: 1rem;
+      height: 1rem;
+      margin: 0.3rem;
+      background-color: white;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 120%;
+      border: 1px solid darkgray;
+      border-radius: 0.25rem;
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    }
+  }
+
 }
