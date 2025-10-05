@@ -1,9 +1,7 @@
 .sidebar {
   background-color: white;
-  width: 30%;
-  border-radius: 0.5rem;
-  height: calc(100vh - 4rem);
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100%;
+  border-left: 1px solid lightgray;
 
   header {
     border-radius: 0.5rem 0.5rem 0 0;
@@ -24,5 +22,65 @@
       box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
     }
   }
+}
 
+.sidebar.swap {
+  border-left: none;
+  border-right: 1px solid lightgray;
+}
+
+.panel {
+  padding: 1rem;
+  margin: 1rem;
+  background-color: snow;
+  border: 1px solid gainsboro;
+  border-radius: 0.25rem;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 0px 7px -2px inset;
+
+  h1 {
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: -0.75rem;
+  }
+}
+
+.panel.empty {
+  display: flex;
+  align-items: center;
+  color: darkgray;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.text-input-container {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+  }
+
+  input {
+    max-width: 25ch;
+  }
+}
+
+textarea {
+  min-width: 100%;
+}
+
+input,
+textarea {
+  font-size: 1rem;
+  padding: 0.2ch 0.5ch;
+}
+
+.separator {
+  width: calc(100% - 2rem);
+  border-bottom: 1px solid darkgray;
+  margin: 1rem;
 }

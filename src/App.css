@@ -1,7 +1,7 @@
 #root {
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: top;
   width: 100vw;
 }
 
