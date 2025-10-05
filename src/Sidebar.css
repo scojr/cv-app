@@ -1,7 +1,6 @@
 .sidebar {
   background-color: white;
   width: 100%;
-  border-left: 1px solid lightgray;
 
   header {
     border-radius: 0.5rem 0.5rem 0 0;
@@ -22,11 +21,6 @@
       box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
     }
   }
-}
-
-.sidebar.swap {
-  border-left: none;
-  border-right: 1px solid lightgray;
 }
 
 .panel {
@@ -83,4 +77,21 @@ textarea {
   width: calc(100% - 2rem);
   border-bottom: 1px solid darkgray;
   margin: 1rem;
+}
+
+.divider {
+  position: relative;
+  width: 4px;
+  height: 100%;
+  background-color: lightgray;
+  cursor: ew-resize;
+}
+
+.divider:hover {
+  background-color: darkgray;
+}
+
+
+.divider.swap {
+  order: -1;
 }

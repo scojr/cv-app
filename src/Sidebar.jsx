@@ -5,11 +5,15 @@ export default function Sidebar() {
   const [sidesSwapped, setSidesSwapped] = useState(false);
   const swapClass = sidesSwapped ? ' swap' : '';
 
+
   return (
-    <div className={'sidebar' + swapClass}>
-      <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
-      <Panel data={'Name'}></Panel>
-    </div >
+    <>
+      <div className={'divider' + swapClass}></div>
+      <div className={'sidebar' + swapClass}>
+        <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
+        <Panel data={'Name'}></Panel>
+      </div >
+    </>
   )
 }
 
