@@ -69,9 +69,12 @@ function Panel({ data }) {
         <textarea id="text-content" value={text} onChange={(e) => onTextChange(e)}></textarea>
         <div className="separator"></div>
       </div>
-      <div className="list-input-container">
+      <legend htmlFor={'list'}>List</legend>
+      <fieldset id='list' className="list-input-container">
         {list}
-      </div>
+        <button className="insert"></button>
+      </fieldset>
+      <div className="separator"></div>
     </div>
   )
 }
