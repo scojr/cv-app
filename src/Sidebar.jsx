@@ -25,7 +25,7 @@ export default function Sidebar({
   setOnArrayChange(onArrayChange);
   const [sidesSwapped, setSidesSwapped] = useState(false);
   const swapClass = sidesSwapped ? ' swap' : '';
-  if (elementData === null) return (
+  if (elementData.heading === null) return (
     <>
       <div className={'divider' + swapClass}></div>
       <div className={'sidebar' + swapClass}>

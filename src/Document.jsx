@@ -35,7 +35,7 @@ export default function Document({ onEditClick }) {
   )
 }
 
-function Section({ heading = '', text = '', array }) {
+function Section({ heading = '', text = '', array = [] }) {
   const [sectionData, setSectionData] = useState({ heading, text, array });
   const [isControls, setIsControls] = useState(false);
 

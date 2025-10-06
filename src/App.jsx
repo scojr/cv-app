@@ -10,9 +10,7 @@ function App() {
   const [text, setText] = useState(null);
   const [array, setArray] = useState(null);
   const element = { heading, text, array }
-  if (setSectionData) {
-    setSectionData(element);
-  }
+
   console.log(element);
   return (
     <div id='root'>
@@ -25,9 +23,18 @@ function App() {
         }}></Document>
       <Sidebar
         elementData={element}
-        onHeadingChange={(e) => setHeading(e.target.value)}
-        onTextChange={(e) => setText(e.target.value)}
-        onArrayChange={(e) => setArray(e.target.value)}>
+        onHeadingChange={(e) => {
+          setHeading(e.target.value);
+          setSectionData(element);
+        }}
+        onTextChange={(e) => {
+          setText(e.target.value)
+          setSectionData(element);
+        }}
+        onArrayChange={(e) => {
+          setArray(e.target.value)
+          setSectionData(element);
+        }}>
       </Sidebar>
     </div>
   )
