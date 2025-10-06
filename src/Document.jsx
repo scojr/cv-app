@@ -7,7 +7,13 @@ const user = {
   profile: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus saepe vitae, beatae dolorum, perferendis quae unde minus consectetur cumque aliquid quaerat molestias! Minus, similique odio vel magni tenetur quam fugiat.'
 }
 
-export default function Document() {
+let onEditClick;
+function setOnEditClick(value) {
+  onEditClick = value;
+}
+
+export default function Document({ onEditClick }) {
+  setOnEditClick(onEditClick);
   return (
     <div className="document">
       <aside>
@@ -29,11 +35,12 @@ export default function Document() {
   )
 }
 
-function Section({ heading, text, array }) {
+function Section({ heading = '', text = '', array }) {
   const [sectionData, setSectionData] = useState({ heading, text, array });
   const [isControls, setIsControls] = useState(false);
+
   const textContent = sectionData.text ? <p>{sectionData.text}</p> : null;
-  let controls = isControls ? <SectionButtons data={sectionData}></SectionButtons> : null;
+  let controls = isControls ? <SectionButtons sectionData={sectionData} setSectionData={setSectionData}></SectionButtons> : null;
   let list = null;
   if (sectionData.array) {
     const arrayList = sectionData.array.map((item) => <li key={item}>{item}</li>)
@@ -52,11 +59,10 @@ function Section({ heading, text, array }) {
   )
 }
 
-function SectionButtons({ data }) {
-  const parentData = data;
+function SectionButtons({ sectionData, setSectionData }) {
   return (
     <div className="edit-buttons">
-      <button className="edit" onClick={() => console.log(parentData)}></button>
+      <button className="edit" onClick={() => onEditClick(sectionData, setSectionData)}></button>
       <button className="delete" onClick={() => console.log()}></button>
     </div >
   )

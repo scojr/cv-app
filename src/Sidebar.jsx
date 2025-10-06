@@ -1,33 +1,64 @@
 import { useState } from 'react'
 import './Sidebar.css'
 
-export default function Sidebar() {
+let onHeaderChange;
+function setOnHeaderChange(value) {
+  onHeaderChange = value;
+}
+let onTextChange;
+function setOnTextChange(value) {
+  onTextChange = value;
+}
+let onArrayChange;
+function setOnArrayChange(value) {
+  onArrayChange = value;
+}
+
+export default function Sidebar({
+  elementData,
+  onHeadingChange,
+  onTextChange,
+  onArrayChange
+}) {
+  setOnHeaderChange(onHeadingChange);
+  setOnTextChange(onTextChange);
+  setOnArrayChange(onArrayChange);
   const [sidesSwapped, setSidesSwapped] = useState(false);
   const swapClass = sidesSwapped ? ' swap' : '';
-
+  if (elementData === null) return (
+    <>
+      <div className={'divider' + swapClass}></div>
+      <div className={'sidebar' + swapClass}>
+        <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
+        <PanelEmpty></PanelEmpty>
+      </div>
+    </>
+  )
 
   return (
     <>
       <div className={'divider' + swapClass}></div>
       <div className={'sidebar' + swapClass}>
         <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
-        <Panel data={'Name'}></Panel>
+        <Panel data={elementData}></Panel>
       </div >
     </>
   )
 }
 
 function Panel({ data }) {
+  const header = data.heading;
+  const text = data.text;
   return (
     <div className="panel">
       <h1>Element Properties</h1>
       <div className="text-input-container">
         <div className="separator"></div>
         <label htmlFor="heading">Heading</label>
-        <input type="text" id='heading' value={'John'} />
+        <input type="text" id='heading' value={header} onChange={(e) => onHeaderChange(e)} />
         <div className="separator"></div>
-        <label htmlFor="text-content">Text Content</label>
-        <textarea id="text-content" value={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus saepe vitae, beatae dolorum, perferendis quae unde minus consectetur cumque aliquid quaerat molestias! Minus, similique odio vel magni tenetur quam fugiat.'}></textarea>
+        <label htmlFor="text-content" >Text Content</label>
+        <textarea id="text-content" value={text} onChange={(e) => onTextChange(e)}></textarea>
         <div className="separator"></div>
       </div>
       <div className="list-input-container">
