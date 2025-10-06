@@ -49,6 +49,14 @@ export default function Sidebar({
 function Panel({ data }) {
   const header = data.heading;
   const text = data.text;
+  const array = data.array;
+
+  let list;
+  if (array) {
+    const arrayList = array.map((item) => <li key={item}><input type="text" value={item} /></li>)
+    list = <ul>{arrayList}</ul>
+  }
+
   return (
     <div className="panel">
       <h1>Element Properties</h1>
@@ -62,7 +70,7 @@ function Panel({ data }) {
         <div className="separator"></div>
       </div>
       <div className="list-input-container">
-
+        {list}
       </div>
     </div>
   )
