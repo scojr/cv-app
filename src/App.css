@@ -1,10 +1,24 @@
 #root {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: top;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  user-select: none;
   width: 100vw;
 }
 
-.swap {
+#root:has(.swap) {
+  grid-template-columns: min-content 1fr;
+}
+
+.document {
+  justify-self: center;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.sidebar-container {
+  justify-self: end;
+}
+
+.sidebar-container.swap {
   order: -2;
+  justify-self: start;
 }

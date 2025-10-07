@@ -9,6 +9,7 @@ let onTextChange;
 function setOnTextChange(value) {
   onTextChange = value;
 }
+
 let onArrayChange;
 function setOnArrayChange(value) {
   onArrayChange = value;
@@ -24,25 +25,49 @@ export default function Sidebar({
   setOnTextChange(onTextChange);
   setOnArrayChange(onArrayChange);
   const [sidesSwapped, setSidesSwapped] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState('500px');
   const swapClass = sidesSwapped ? ' swap' : '';
+  const handleDivider = (e, isSwapped) => {
+    document.onmousemove = drag;
+    document.onmouseup = endDrag;
+    document.body.style.userSelect = 'none';
+    document.body.style.cursor = 'ew-resize';
+    function drag(e) {
+      if (isSwapped) {
+        console.log('true', e);
+        setSidebarWidth(e.pageX + 'px');
+      } else {
+        console.log('false', e);
+        setSidebarWidth((window.innerWidth - e.pageX) + 'px');
+      }
+    }
+    function endDrag() {
+      document.body.style.userSelect = 'unset';
+      document.body.style.cursor = 'unset';
+      document.onmousedown = null;
+      document.onmousemove = null;
+      document.onmouseup = null;
+    }
+  }
+
   if (elementData.heading === null) return (
-    <>
-      <div className={'divider' + swapClass}></div>
-      <div className={'sidebar' + swapClass}>
+    <div style={{ '--custom-width': sidebarWidth }} className={'sidebar-container' + swapClass}>
+      <div onMouseDown={(e) => handleDivider(e, sidesSwapped)} className={'divider' + swapClass}></div>
+      <div className={'sidebar'}>
         <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
         <PanelEmpty></PanelEmpty>
       </div>
-    </>
+    </div>
   )
 
   return (
-    <>
-      <div className={'divider' + swapClass}></div>
-      <div className={'sidebar' + swapClass}>
+    <div style={{ '--custom-width': sidebarWidth }} className={'sidebar-container' + swapClass}>
+      <div onMouseDown={(e) => handleDivider(e, sidesSwapped)} className={'divider' + swapClass} ></div>
+      <div className={'sidebar'}>
         <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
         <Panel data={elementData}></Panel>
       </div >
-    </>
+    </div>
   )
 }
 

@@ -1,3 +1,14 @@
+.sidebar-container {
+  display: flex;
+  width: var(--custom-width);
+  min-width: 400px;
+  max-width: calc(100vw - (100vh / 1.284));
+
+  .divider.swap {
+    order: 1;
+  }
+}
+
 .sidebar {
   background-color: white;
   width: 100%;
@@ -29,7 +40,7 @@
   background-color: snow;
   border: 1px solid gainsboro;
   border-radius: 0.25rem;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 0px 7px -2px inset;
+  box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
 
   h1 {
     font-size: 0.8rem;
@@ -67,6 +78,7 @@ legend {
 
 textarea {
   min-width: 100%;
+  height: 20ch;
 }
 
 input,
@@ -83,10 +95,11 @@ textarea {
 
 .divider {
   position: relative;
-  width: 4px;
+  width: 2px;
   height: 100%;
-  background-color: lightgray;
+  background-color: darkgray;
   cursor: ew-resize;
+  pointer-events: all;
 }
 
 .divider:hover {
@@ -129,7 +142,7 @@ fieldset {
     transform: translateX(-50%) translateY(50%);
     border-radius: 0.2rem;
     border: 1px solid darkgray;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 6px 1px inset;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px 1px inset;
 
     /* background-image: url('./assets/plus-thick.svg'); */
     &::after {
@@ -141,7 +154,7 @@ fieldset {
       bottom: 50%;
       transform: translateX(-50%) translateY(50%);
       background-image: url('./assets/plus-thick.svg');
-      opacity: 50%;
+      opacity: 70%;
     }
   }
 
