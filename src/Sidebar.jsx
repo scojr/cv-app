@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { getListFromId } from './list-handler';
 import './Sidebar.css'
 
 let onHeaderChange;
@@ -10,20 +11,20 @@ function setOnTextChange(value) {
   onTextChange = value;
 }
 
-let onArrayChange;
-function setOnArrayChange(value) {
-  onArrayChange = value;
+let onListChange;
+function setOnListChange(value) {
+  onListChange = value;
 }
 
 export default function Sidebar({
   elementData,
   onHeadingChange,
   onTextChange,
-  onArrayChange
+  onListChange
 }) {
   setOnHeaderChange(onHeadingChange);
   setOnTextChange(onTextChange);
-  setOnArrayChange(onArrayChange);
+  setOnListChange(onListChange);
   const [sidesSwapped, setSidesSwapped] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState('500px');
   const swapClass = sidesSwapped ? ' swap' : '';
@@ -34,10 +35,8 @@ export default function Sidebar({
     document.body.style.cursor = 'ew-resize';
     function drag(e) {
       if (isSwapped) {
-        console.log('true', e);
         setSidebarWidth(e.pageX + 'px');
       } else {
-        console.log('false', e);
         setSidebarWidth((window.innerWidth - e.pageX) + 'px');
       }
     }
@@ -74,13 +73,9 @@ export default function Sidebar({
 function Panel({ data }) {
   const header = data.heading;
   const text = data.text;
-  const array = data.array;
+  const listId = data.listId;
 
-  let list;
-  if (array) {
-    const arrayList = array.map((item) => <li key={item}><input type="text" value={item} /></li>)
-    list = <ul>{arrayList}</ul>
-  }
+  const list = listId ? <SectionList listId={listId}></SectionList> : null;
 
   return (
     <div className="panel">
@@ -95,12 +90,34 @@ function Panel({ data }) {
         <div className="separator"></div>
       </div>
       <legend htmlFor={'list'}>List</legend>
-      <fieldset id='list' className="list-input-container">
-        {list}
-        <button className="insert"></button>
-      </fieldset>
+      {list}
       <div className="separator"></div>
     </div>
+  )
+}
+
+function SectionList({ listId }) {
+  const listObject = getListFromId(listId);
+  const list = listObject.array.map((item, index) => <li key={listObject.ids[index]}><ListInput initialValue={item} index={index} listId={listId} entryId={listObject.ids[index]}></ListInput></li>)
+  return (
+    <fieldset id='list' className="list-input-container">
+      <ul>{list}</ul>
+      <button className="insert" ></button>
+    </fieldset>
+  )
+}
+
+function ListInput({ initialValue, index, listId }) {
+  const [value, setValue] = useState(initialValue);
+  const myList = getListFromId(listId);
+  function onChange(newValue) {
+    setValue(newValue);
+    myList.editValue(index, newValue);
+    console.log(getListFromId(listId));
+    onListChange(value);
+  }
+  return (
+    <input type="text" value={value} name="" id="" onChange={(e) => onChange(e.target.value)} />
   )
 }
 

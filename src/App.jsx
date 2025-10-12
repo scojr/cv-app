@@ -1,17 +1,19 @@
 import { useState } from 'react'
+import { getListFromId } from './list-handler';
 import './App.css'
 import Document from './Document'
 import Sidebar from './Sidebar'
 
 let setSectionData;
+let setListObject;
 
 function App() {
   const [heading, setHeading] = useState(null);
   const [text, setText] = useState(null);
-  const [array, setArray] = useState(null);
-  const element = { heading, text, array }
-  console.log(element, setSectionData);
+  const [listId, setListId] = useState(null);
+  const element = { heading, text, listId }
   if (setSectionData) setSectionData(element);
+  if (setListObject) setListObject(listId);
 
   return (
     <div id='root'>
@@ -20,7 +22,7 @@ function App() {
           setSectionData = func;
           setHeading(data.heading);
           setText(data.text);
-          setArray(data.array);
+          setListId(data.listId);
         }}></Document>
       <Sidebar
         elementData={element}
@@ -30,8 +32,7 @@ function App() {
         onTextChange={(e) => {
           setText(e.target.value);
         }}
-        onArrayChange={(e) => {
-          setArray(e.target.value);
+        onListChange={() => {
         }}>
       </Sidebar>
     </div>

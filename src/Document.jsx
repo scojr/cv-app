@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { getListFromId } from './list-handler';
+
 import './Document.css'
 
 const user = {
@@ -8,6 +10,7 @@ const user = {
 }
 
 let onEditClick;
+
 function setOnEditClick(value) {
   onEditClick = value;
 }
@@ -18,8 +21,8 @@ export default function Document({ onEditClick }) {
     <div className="document">
       <aside>
         <div className="avatar"></div>
-        <Section heading='Contact' array={['123-555-1234', 'me@email.com', '123 Address St. City, State', 'www.theodinproject.com']}></Section>
-        <Section heading="Skills" array={[1, 2, 3]} ></Section>
+        <Section heading='Contact' listId={'1158d3cf-f0bd-4eb6-9931-4906af93dbd9'}></Section>
+        <Section heading="Skills" listId={'92eccd36-6647-4426-84dd-643f63e66378'} ></Section>
       </aside>
       <main>
         <header>
@@ -35,17 +38,22 @@ export default function Document({ onEditClick }) {
   )
 }
 
-function Section({ heading = '', text = '', array = [] }) {
-  const [sectionData, setSectionData] = useState({ heading, text, array });
+function Section({ heading = '', text = '', listId = '', }) {
+  const [sectionData, setSectionData] = useState({ heading, text, listId });
   const [isControls, setIsControls] = useState(false);
-
+  const [listObject, setListObject] = useState(getListFromId(listId));
   const textContent = sectionData.text ? <p>{sectionData.text}</p> : null;
-  let controls = isControls ? <SectionButtons sectionData={sectionData} setSectionData={setSectionData}></SectionButtons> : null;
+
+  if (listObject !== getListFromId(sectionData.listId)) setListObject(listId);
+
+
+  let controls = isControls ? <SectionButtons sectionData={sectionData} setSectionData={setSectionData} setListObject={setListObject}></SectionButtons> : null;
+
   let list = null;
-  if (sectionData.array) {
-    const arrayList = sectionData.array.map((item) => <li key={item}>{item}</li>)
-    list = <ul>{arrayList}</ul>
+  if (sectionData.listId) {
+    list = <ListSection listObject={listObject}></ListSection>
   }
+
   return (
     <section
       onMouseEnter={() => setIsControls(true)}
@@ -59,11 +67,18 @@ function Section({ heading = '', text = '', array = [] }) {
   )
 }
 
-function SectionButtons({ sectionData, setSectionData }) {
+function SectionButtons({ sectionData, setSectionData, listObject, setListObject }) {
   return (
     <div className="edit-buttons">
-      <button className="edit" onClick={() => onEditClick(sectionData, setSectionData)}></button>
+      <button className="edit" onClick={() => onEditClick(sectionData, setSectionData, listObject, setListObject)}></button>
       <button className="delete" onClick={() => console.log()}></button>
     </div >
+  )
+}
+
+function ListSection({ listObject }) {
+  const arrayList = listObject.array.map((item, index) => <li key={listObject.ids[index]}>{item}</li>)
+  return (
+    <ul>{arrayList}</ul>
   )
 }
