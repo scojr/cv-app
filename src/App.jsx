@@ -1,28 +1,25 @@
 import { useState } from 'react'
-import { getListFromId } from './list-handler';
 import './App.css'
 import Document from './Document'
 import Sidebar from './Sidebar'
 
-let setSectionData;
-let setListObject;
+let setSectionDataGlobal;
 
 function App() {
   const [heading, setHeading] = useState(null);
   const [text, setText] = useState(null);
   const [listId, setListId] = useState(null);
   const element = { heading, text, listId }
-  if (setSectionData) setSectionData(element);
-  if (setListObject) setListObject(listId);
+  if (setSectionDataGlobal) setSectionDataGlobal(element);
 
   return (
     <div id='root'>
       <Document
-        onEditClick={(data, func) => {
-          setSectionData = func;
-          setHeading(data.heading);
-          setText(data.text);
-          setListId(data.listId);
+        onEditClick={(sectionData, setSectionData) => {
+          setSectionDataGlobal = setSectionData;
+          setHeading(sectionData.heading);
+          setText(sectionData.text);
+          setListId(sectionData.listId);
         }}></Document>
       <Sidebar
         elementData={element}
@@ -33,6 +30,8 @@ function App() {
           setText(e.target.value);
         }}
         onListChange={() => {
+          setListId(null);
+          setListId(listId);
         }}>
       </Sidebar>
     </div>

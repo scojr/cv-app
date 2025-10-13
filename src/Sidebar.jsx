@@ -113,8 +113,7 @@ function ListInput({ initialValue, index, listId }) {
   function onChange(newValue) {
     setValue(newValue);
     myList.editValue(index, newValue);
-    console.log(getListFromId(listId));
-    onListChange(value);
+    onListChange(myList);
   }
   return (
     <input type="text" value={value} name="" id="" onChange={(e) => onChange(e.target.value)} />

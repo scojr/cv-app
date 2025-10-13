@@ -44,8 +44,6 @@ function Section({ heading = '', text = '', listId = '', }) {
   const [listObject, setListObject] = useState(getListFromId(listId));
   const textContent = sectionData.text ? <p>{sectionData.text}</p> : null;
 
-  if (listObject !== getListFromId(sectionData.listId)) setListObject(listId);
-
 
   let controls = isControls ? <SectionButtons sectionData={sectionData} setSectionData={setSectionData} setListObject={setListObject}></SectionButtons> : null;
 
