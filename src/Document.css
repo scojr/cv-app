@@ -56,21 +56,13 @@ aside {
       font-size: 1.4rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
-      margin-top: 2rem;
-    }
-
-    ul {
-      list-style: initial;
-
-      li {
-        margin: 0.5rem 1rem;
-      }
     }
   }
 
   .separator {
     border-bottom: 1px solid white;
-    margin: 0;
+    width: calc(100% - 1rem);
+    margin-left: 0rem;
   }
 }
 
@@ -106,6 +98,17 @@ main {
   }
 }
 
+aside,
+main {
+  ul {
+    list-style: initial;
+
+    li {
+      margin: 0.5rem 1rem;
+    }
+  }
+}
+
 .avatar {
   aspect-ratio: 1/1;
   border-radius: 100%;
@@ -122,13 +125,15 @@ main {
   background-blend-mode: multiply;
 }
 
-.separator {
-  margin-bottom: 0.5rem;
-}
-
 section,
 header {
   position: relative;
+}
+
+section.headless {
+  >.separator {
+    display: none;
+  }
 }
 
 section:hover::after {

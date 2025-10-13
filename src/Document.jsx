@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { getListFromId } from './list-handler';
+import { newList, getListFromId } from './list-handler';
+import { placeholderSections } from './placeholder-data';
 
 import './Document.css'
 
@@ -21,17 +22,39 @@ export default function Document({ onEditClick }) {
   const [sections, setSections] = useState([])
   const [nextId, setNextId] = useState(0);
 
-  function addSection(isMain) {
+  function addSection(isMain, data) {
+    console.log(sections);
     const place = isMain ? 'main' : 'aside';
-    setSections([...sections, { id: nextId, place }])
-    setNextId(nextId + 1);
-    console.log(sections, nextId)
+    setSections([...sections, { id: nextId, place, data }])
+    setNextId(nextId => nextId + 1);
   }
 
   function deleteSection(id) {
     const indexToRemove = sections.findIndex((section) => section.id === id);
     const newSections = sections.slice(indexToRemove, 1);
     setSections(newSections);
+  }
+
+  if (sections.length === 0) addPlaceholders();
+
+  function addPlaceholders() {
+    let nextId = 0;
+    let newSections = [];
+    pushSection('main');
+    pushSection('aside');
+
+    function pushSection(place) {
+      placeholderSections[place].forEach((section) => {
+        const sectionList = section.list ? newList(section.list) : null;
+        console.log(sectionList);
+        newSections.push({ id: nextId, place: place, data: section, listId: sectionList.id })
+        nextId += 1;
+      })
+    }
+
+    console.log(nextId, newSections)
+    setSections(newSections);
+    setNextId(nextId);
   }
 
   const mainSections = sections.filter((section) => section.place === 'main');
@@ -41,10 +64,8 @@ export default function Document({ onEditClick }) {
   return (
     <div className="document">
       <aside>
-        <div className="avatar"></div>
-        <Section heading='Contact' listId={'1158d3cf-f0bd-4eb6-9931-4906af93dbd9'}></Section>
-        <Section heading="Skills" listId={'92eccd36-6647-4426-84dd-643f63e66378'} ></Section>        {asideSections.map((section) => (
-          <Section heading='New Section' text={loremString} key={section.id} id={section.id} />
+        <div className="avatar"></div>      {asideSections.map((section) => (
+          <Section heading={section.data.heading || 'New Section'} text={section.data.text || loremString} listId={section.listId} onDelete={deleteSection} key={section.id} id={section.id} />
         ))}
         <button className='add-entry-side' onClick={() => addSection(false)}></button>
       </aside>
@@ -53,12 +74,8 @@ export default function Document({ onEditClick }) {
           <h1 className="client-name">{user.name}</h1>
           <h2 className="occupation-title">{user.occupation}</h2>
         </header>
-        <Section heading='Profile' text={user.profile}></Section>
-        <Section heading='Experience'></Section>
-        <Section heading='Education'></Section>
-        <Section heading='References'></Section>
         {mainSections.map((section) => (
-          <Section heading='New Section' text={loremString} onDelete={deleteSection} key={section.id} id={section.id} />
+          <Section heading={section.data.heading || 'New Section'} text={section.data.text || loremString} listId={section.listId} onDelete={deleteSection} key={section.id} id={section.id} />
         ))}
         <button className='add-entry-body' onClick={() => addSection(true)}></button>
       </main>
@@ -82,6 +99,7 @@ function Section({ id, onDelete, heading = '', text = '', listId = '', }) {
 
   return (
     <section
+      className={testIfStringEmpty(sectionData.heading) ? 'headless' : ''}
       onMouseEnter={() => setIsControls(true)}
       onMouseLeave={() => setIsControls(false)}>
       <h3>{sectionData.heading}</h3>
@@ -109,3 +127,7 @@ function ListSection({ listObject }) {
   )
 }
 
+function testIfStringEmpty(string) {
+  if (string === "" || string === " ") return true;
+  else return false;
+}

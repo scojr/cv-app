@@ -11,7 +11,7 @@ const placeholderSections = {
       list: ['Developed and maintained client-facing applications using React and Tailwind CSS.', 'Improved site performance by 30% through optimized code and image handling.', 'Collaborated with designers and backend developers to launch projects on schedule.'],
     },
     {
-      heading: '',
+      heading: ' ',
       text: 'LoremTech 2025 - 2029',
       list: ['Built over 20 responsive websites for small businesses and startups.',
         'Integrated APIs for payment systems, booking platforms, and data visualization.',
@@ -21,12 +21,12 @@ const placeholderSections = {
   aside: [
     {
       heading: 'Contact',
-      text: '',
+      text: ' ',
       list: ['123-555-1234', 'email@thiswebsite.com', 'www.theodinproject.com'],
     },
     {
       heading: 'Skills',
-      text: '',
+      text: ' ',
       list: ['Project Management', 'Teamwork', 'Leadership', 'Effective Communication',],
     },
     {
@@ -35,7 +35,7 @@ const placeholderSections = {
       list: ['Phone: 123-456-7890', 'Email: email@thiswebsite.com'],
     },
     {
-      heading: '',
+      heading: ' ',
       text: 'Bill Grayson',
       list: ['Phone: 123-456-7890', 'Email: email@thiswebsite.com'],
     },
