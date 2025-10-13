@@ -42,4 +42,10 @@ const placeholderSections = {
   ],
 }
 
-export { placeholderSections };
+const newSectionTemplate = {
+  heading: 'New Section',
+  text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  list: [],
+}
+
+export { placeholderSections, newSectionTemplate };

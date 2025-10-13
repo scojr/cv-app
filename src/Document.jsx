@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { newList, getListFromId } from './list-handler';
-import { placeholderSections } from './placeholder-data';
+import { placeholderSections, newSectionTemplate } from './placeholder-data';
 
 import './Document.css'
 
 const user = {
   name: 'John Doe',
   occupation: 'Web Developer',
-  profile: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus saepe vitae, beatae dolorum, perferendis quae unde minus consectetur cumque aliquid quaerat molestias! Minus, similique odio vel magni tenetur quam fugiat.'
 }
-
-const loremString = 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
 
 let onEditClick;
 
@@ -22,16 +19,18 @@ export default function Document({ onEditClick }) {
   const [sections, setSections] = useState([])
   const [nextId, setNextId] = useState(0);
 
-  function addSection(isMain, data) {
-    console.log(sections);
+  function addSection(isMain, data = newSectionTemplate) {
     const place = isMain ? 'main' : 'aside';
     setSections([...sections, { id: nextId, place, data }])
     setNextId(nextId => nextId + 1);
   }
 
   function deleteSection(id) {
+    console.log(id);
     const indexToRemove = sections.findIndex((section) => section.id === id);
-    const newSections = sections.slice(indexToRemove, 1);
+    console.log({ indexToRemove });
+    const newSections = sections.toSpliced(indexToRemove, 1);
+    console.log({ sections, newSections });
     setSections(newSections);
   }
 
@@ -46,13 +45,11 @@ export default function Document({ onEditClick }) {
     function pushSection(place) {
       placeholderSections[place].forEach((section) => {
         const sectionList = section.list ? newList(section.list) : null;
-        console.log(sectionList);
         newSections.push({ id: nextId, place: place, data: section, listId: sectionList.id })
         nextId += 1;
       })
     }
 
-    console.log(nextId, newSections)
     setSections(newSections);
     setNextId(nextId);
   }
@@ -65,7 +62,7 @@ export default function Document({ onEditClick }) {
     <div className="document">
       <aside>
         <div className="avatar"></div>      {asideSections.map((section) => (
-          <Section heading={section.data.heading || 'New Section'} text={section.data.text || loremString} listId={section.listId} onDelete={deleteSection} key={section.id} id={section.id} />
+          <Section heading={section.data.heading} text={section.data.text} listId={section.listId} onDelete={deleteSection} key={section.id} id={section.id} />
         ))}
         <button className='add-entry-side' onClick={() => addSection(false)}></button>
       </aside>
@@ -75,7 +72,7 @@ export default function Document({ onEditClick }) {
           <h2 className="occupation-title">{user.occupation}</h2>
         </header>
         {mainSections.map((section) => (
-          <Section heading={section.data.heading || 'New Section'} text={section.data.text || loremString} listId={section.listId} onDelete={deleteSection} key={section.id} id={section.id} />
+          <Section heading={section.data.heading} text={section.data.text} listId={section.listId} onDelete={deleteSection} key={section.id} id={section.id} />
         ))}
         <button className='add-entry-body' onClick={() => addSection(true)}></button>
       </main>
