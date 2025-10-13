@@ -23,6 +23,7 @@ export default function Document({ onEditClick }) {
         <div className="avatar"></div>
         <Section heading='Contact' listId={'1158d3cf-f0bd-4eb6-9931-4906af93dbd9'}></Section>
         <Section heading="Skills" listId={'92eccd36-6647-4426-84dd-643f63e66378'} ></Section>
+        <button className='add-entry-side'></button>
       </aside>
       <main>
         <header>
@@ -33,6 +34,7 @@ export default function Document({ onEditClick }) {
         <Section heading='Experience'></Section>
         <Section heading='Education'></Section>
         <Section heading='References'></Section>
+        <button className='add-entry-body'></button>
       </main>
     </div>
   )

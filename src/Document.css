@@ -6,8 +6,42 @@
   background-color: white;
 
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 35% 1fr;
   gap: 1rem;
+}
+
+button.add-entry-body,
+button.add-entry-side {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 0.5rem;
+  border: 1px solid darkgray;
+  background-color: white;
+  background-image: url('./assets/plus-thick.svg');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: calc(50% - 1.5vw);
+  margin-top: 1rem;
+  opacity: 30%;
+  visibility: hidden;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+
+  &:hover {
+    opacity: 100%;
+  }
+}
+
+main:hover {
+  >button.add-entry-body {
+    visibility: visible;
+  }
+}
+
+aside:hover {
+  >button.add-entry-side {
+    visibility: visible;
+  }
 }
 
 aside {
@@ -36,6 +70,7 @@ aside {
 
   .separator {
     border-bottom: 1px solid white;
+    margin: 0;
   }
 }
 
@@ -66,18 +101,25 @@ main {
 
   .separator {
     border-bottom: 1px solid black;
+    width: calc(100% - 1rem);
+    margin-left: 0rem;
   }
 }
 
 .avatar {
   aspect-ratio: 1/1;
   border-radius: 100%;
-  background-color: grey;
+  background-color: rgb(221, 221, 221);
   background-image: url('./assets/avatar-placeholder.jpg');
   background-position: center;
   background-size: contain;
   border: 0.25rem solid white;
   margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+.avatar:hover {
+  background-blend-mode: multiply;
 }
 
 .separator {
