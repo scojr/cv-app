@@ -116,7 +116,7 @@ function ListInput({ initialValue, index, listId }) {
     onListChange(myList);
   }
   return (
-    <input type="text" value={value} name="" id="" onChange={(e) => onChange(e.target.value)} />
+    <textarea type="text" value={value} name="" id="" onChange={(e) => onChange(e.target.value)} />
   )
 }
 
