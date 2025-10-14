@@ -116,15 +116,38 @@ fieldset {
   border: none;
   padding-bottom: 2.25rem;
 
+  li {
+    display: flex;
+    align-items: center;
+
+    button.list-options {
+      background-image: url('./assets/settings.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      opacity: 50%;
+      min-width: 1rem;
+      height: 1rem;
+      border-radius: 100%;
+      margin-left: -0.5rem;
+
+      &:hover {
+        opacity: 100%;
+      }
+    }
+  }
+
   ul {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     padding: 0.25rem;
 
+
     textarea {
-      width: 100%;
+      min-width: calc(100% - 1rem);
       height: 1.75rem;
+      margin-left: 0.5rem;
       overflow: hidden;
       resize: vertical;
 
