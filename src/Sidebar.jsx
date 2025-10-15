@@ -99,12 +99,18 @@ function Panel({ data }) {
 function SectionList({ listId }) {
   const [stateToggle, setStateToggle] = useState(false)
   const listObject = getListFromId(listId);
-  const list = listObject.array.map((item, index) => <li key={listObject.ids[index]}><ListInput initialValue={item} index={index} listId={listId} entryId={listObject.ids[index]}></ListInput></li>)
+  const list = listObject.array.map((item, index) => <li key={listObject.ids[index]}><ListInput initialValue={item} index={index} listId={listId} entryId={listObject.ids[index]} onDeleteClick={deleteListItem}></ListInput></li>)
 
   function addToList() {
     listObject.push('')
     console.log(listObject);
-    onListChange();
+    onListChange(listObject);
+    setStateToggle(!stateToggle);
+  }
+
+  function deleteListItem(listItemId) {
+    listObject.delete(listItemId)
+    onListChange(listObject);
     setStateToggle(!stateToggle);
   }
 
@@ -116,17 +122,19 @@ function SectionList({ listId }) {
   )
 }
 
-function ListInput({ initialValue, index, listId }) {
+function ListInput({ initialValue, index, listId, entryId, onDeleteClick }) {
   const [value, setValue] = useState(initialValue);
   const myList = getListFromId(listId);
+
   function onChange(newValue) {
     setValue(newValue);
     myList.editValue(index, newValue);
     onListChange(myList);
   }
+
   return (
     <>
-      <button className='list-options'></button>
+      <button className='list-options' onClick={() => onDeleteClick(entryId)}></button>
       <textarea type="text" value={value} name="" id="" onChange={(e) => onChange(e.target.value)} />
     </>
   )

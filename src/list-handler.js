@@ -22,6 +22,16 @@ class List {
   editValue(index, value) {
     this.array[index] = value;
   }
+  delete(id) {
+    console.log(id);
+    console.log(this);
+    const indexToRemove = this.ids.indexOf(id);
+    const newArray = this.array.toSpliced(indexToRemove, 1);
+    const newIds = this.ids.toSpliced(indexToRemove, 1);
+    console.log(newArray);
+    this.array = newArray;
+    this.ids = newIds;
+  }
 }
 
 function newList(array) {

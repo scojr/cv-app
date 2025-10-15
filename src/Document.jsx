@@ -44,7 +44,7 @@ export default function Document({ onEditClick }) {
 
     function pushSection(place) {
       placeholderSections[place].forEach((section) => {
-        const sectionList = section.list ? newList(section.list) : null;
+        const sectionList = newList(section.list);
         newSections.push({ id: nextId, place: place, data: section, listId: sectionList.id })
         nextId += 1;
       })
@@ -80,7 +80,7 @@ export default function Document({ onEditClick }) {
   )
 }
 
-function Section({ id, onDelete, heading = '', text = '', listId = '', }) {
+function Section({ id, onDelete, heading = '', text = '', listId = newList([]).id, }) {
   const [sectionData, setSectionData] = useState({ heading, text, listId });
   const [isControls, setIsControls] = useState(false);
   const [listObject, setListObject] = useState(getListFromId(listId));
@@ -89,10 +89,7 @@ function Section({ id, onDelete, heading = '', text = '', listId = '', }) {
 
   let controls = isControls ? <SectionButtons id={id} onDelete={onDelete} sectionData={sectionData} setSectionData={setSectionData} setListObject={setListObject} ></SectionButtons> : null;
 
-  let list = null;
-  if (sectionData.listId) {
-    list = <ListSection listObject={listObject}></ListSection>
-  }
+  const list = <ListSection listObject={listObject}></ListSection>
 
   return (
     <section
