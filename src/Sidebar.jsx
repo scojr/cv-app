@@ -97,12 +97,21 @@ function Panel({ data }) {
 }
 
 function SectionList({ listId }) {
+  const [stateToggle, setStateToggle] = useState(false)
   const listObject = getListFromId(listId);
   const list = listObject.array.map((item, index) => <li key={listObject.ids[index]}><ListInput initialValue={item} index={index} listId={listId} entryId={listObject.ids[index]}></ListInput></li>)
+
+  function addToList() {
+    listObject.push('')
+    console.log(listObject);
+    onListChange();
+    setStateToggle(!stateToggle);
+  }
+
   return (
     <fieldset id='list' className="list-input-container">
       <ul>{list}</ul>
-      <button className="insert" ></button>
+      <button className="insert" onClick={addToList} ></button>
     </fieldset>
   )
 }
