@@ -15,9 +15,10 @@ function setOnEditClick(value) {
   onEditClick = value;
 }
 
-export default function Document({ onEditClick }) {
+export default function Document({ onEditClick, color, font, fontSize }) {
   const [sections, setSections] = useState([])
   const [nextId, setNextId] = useState(0);
+  const fontSizeValue = `${fontSize}px`
 
   function addSection(isMain, data = newSectionTemplate) {
     const place = isMain ? 'main' : 'aside';
@@ -59,8 +60,8 @@ export default function Document({ onEditClick }) {
 
   setOnEditClick(onEditClick);
   return (
-    <div className="document">
-      <aside>
+    <div className="document" style={{ "--font-size": fontSizeValue }}>
+      <aside style={{ "--aside-color": color }}>
         <div className="avatar"></div>      {asideSections.map((section) => (
           <Section heading={section.data.heading} text={section.data.text} listId={section.listId} onDelete={deleteSection} key={section.id} id={section.id} />
         ))}

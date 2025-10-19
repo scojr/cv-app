@@ -8,6 +8,8 @@
   display: grid;
   grid-template-columns: 35% 1fr;
   gap: 1rem;
+  font-size: var(--font-size);
+  overflow: hidden;
 }
 
 button.add-entry-body,
@@ -47,13 +49,14 @@ aside:hover {
 aside {
   padding: 2rem;
   background-color: var(--accent-color);
+  background-color: var(--aside-color);
   color: white;
 
   section {
     margin-bottom: 1rem;
 
     h3 {
-      font-size: 1.4rem;
+      font-size: calc(var(--font-size) * 1.4);
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
@@ -71,11 +74,11 @@ main {
 
   header {
     h1 {
-      font-size: 3.4rem;
+      font-size: calc(var(--font-size) * 3.4);
     }
 
     h2 {
-      font-size: 1.6rem;
+      font-size: calc(var(--font-size) * 1.6);
     }
 
     margin-bottom: 3rem;
@@ -85,7 +88,7 @@ main {
     margin-top: 1rem;
 
     h3 {
-      font-size: 1.4rem;
+      font-size: calc(var(--font-size) * 1.4);
       font-weight: bold;
       margin-bottom: 0.5rem;
     }

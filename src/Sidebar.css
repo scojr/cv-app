@@ -219,7 +219,6 @@ fieldset {
     width: 2rem;
     height: 2rem;
     background-position: center;
-    background-size: 80%;
     background-repeat: no-repeat;
     border: 1px solid lightgray;
     border-radius: 50%;
@@ -238,9 +237,24 @@ fieldset {
       background-image: url('./assets/format-size.svg');
     }
 
+  }
+
+  button {
+    background-size: 80%;
+
     &:hover {
       border: 1px solid darkgray;
       background-color: lightgray;
+    }
+  }
+
+
+  label.color {
+    border: 4px solid var(--label-color);
+    background-size: 93%;
+
+    &:hover {
+      background-color: var(--label-color);
     }
   }
 

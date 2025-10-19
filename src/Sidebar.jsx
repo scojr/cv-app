@@ -17,6 +17,9 @@ function setOnListChange(value) {
 }
 
 export default function Sidebar({
+  onColorChange,
+  onFontChange,
+  onFontSizeChange,
   elementData,
   onHeadingChange,
   onTextChange,
@@ -56,7 +59,7 @@ export default function Sidebar({
 
   return (
     <>
-      <StyleBar></StyleBar>
+      <StyleBar onColorChange={onColorChange} onFontChange={onFontChange} onFontSizeChange={onFontSizeChange}></StyleBar>
       <div style={{ '--custom-width': sidebarWidth }} className={'sidebar-container' + swapClass}>
         <div onMouseDown={(e) => handleDivider(e, sidesSwapped)} className={'divider' + swapClass} ></div>
         <div className={'sidebar'}>
@@ -148,8 +151,12 @@ function PanelEmpty() {
   )
 }
 
-function StyleBar() {
+function StyleBar({
+  onColorChange = { onColorChange },
+  onFontChange = { onFontChange },
+  onFontSizeChange = { onFontSizeChange }, }) {
   const [displayedInput, setDisplayedInput] = useState(null)
+  const [color, setColor] = useState('#5f8fbb');
   const componentRef = useRef(null);
   const classes = displayedInput ? 'open' : 'closed';
   const clickHandler = (component) => {
@@ -170,28 +177,34 @@ function StyleBar() {
   })
   return (
     <div ref={componentRef} className={"style panel " + classes}>
-      <label className="color" autoFocus htmlFor="color">Color</label>
-      <input type="color" name="color" id="color" onClick={() => clickHandler()} />
-      <button className="font" onClick={() => clickHandler(<StyleFont ></StyleFont>)}></button>
-      <button className="font-size" onClick={() => clickHandler(<StyleFontSize ></StyleFontSize>)}></button>
+      <label style={{ "--label-color": color }} className="color" autoFocus htmlFor="color">Color</label>
+      <input type="color" name="color" id="color" value={color} onChange={(e) => {
+        onColorChange(e.target.value);
+        setColor(e.target.value)
+      }} onClick={() => clickHandler()} />
+      <button className="font" onClick={() => clickHandler(<StyleFont onFontChange ></StyleFont>)}></button>
+      <button className="font-size" onClick={() => clickHandler(<StyleFontSize onFontSizeChange={onFontSizeChange} ></StyleFontSize>)}></button>
       {displayedInput}
     </div>
   )
 }
-function StyleFont() {
+function StyleFont({ onFontChange }) {
   return (
     <div className="style-input">
       <label className="font" htmlFor="font">Font</label>
-      <select name="font" id="font"></select>
+      <select name="font" id="font" onChange={(e) => onFontChange(e.target.value)}></select>
     </div>
   )
 }
-function StyleFontSize() {
+function StyleFontSize({ onFontSizeChange = { onFontSizeChange } }) {
   const [fontSize, setFontSize] = useState(20);
   return (
     <div className="style-input">
       <label className="font-size" htmlFor="font-size">Font Size</label>
-      <input type="range" name="font-size" id="font-size" min="12" max="32" defaultValue="20" onChange={(e) => setFontSize(e.target.value)} />
+      <input type="range" name="font-size" id="font-size" min="12" max="32" defaultValue="20" onChange={(e) => {
+        setFontSize(e.target.value);
+        onFontSizeChange(e.target.value);
+      }} />
       <span>{fontSize}<span className="unit-label">px</span></span>
     </div>
   )
