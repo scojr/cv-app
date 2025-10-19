@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { getListFromId } from './list-handler';
 import './Sidebar.css'
 
@@ -49,24 +49,22 @@ export default function Sidebar({
     }
   }
 
-  if (elementData.heading === null) return (
-    <div style={{ '--custom-width': sidebarWidth }} className={'sidebar-container' + swapClass}>
-      <div onMouseDown={(e) => handleDivider(e, sidesSwapped)} className={'divider' + swapClass}></div>
-      <div className={'sidebar'}>
-        <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
-        <PanelEmpty></PanelEmpty>
-      </div>
-    </div>
-  )
+  let panelData = (data) => {
+    if (!data.heading) return <PanelEmpty></PanelEmpty>;
+    else return <Panel data={data}></Panel>;
+  }
 
   return (
-    <div style={{ '--custom-width': sidebarWidth }} className={'sidebar-container' + swapClass}>
-      <div onMouseDown={(e) => handleDivider(e, sidesSwapped)} className={'divider' + swapClass} ></div>
-      <div className={'sidebar'}>
-        <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
-        <Panel data={elementData}></Panel>
-      </div >
-    </div>
+    <>
+      <StyleBar></StyleBar>
+      <div style={{ '--custom-width': sidebarWidth }} className={'sidebar-container' + swapClass}>
+        <div onMouseDown={(e) => handleDivider(e, sidesSwapped)} className={'divider' + swapClass} ></div>
+        <div className={'sidebar'}>
+          <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
+          {panelData(elementData)}
+        </div >
+      </div>
+    </>
   )
 }
 
@@ -146,6 +144,55 @@ function PanelEmpty() {
       <div className="box">
         No Element Selected
       </div>
+    </div>
+  )
+}
+
+function StyleBar() {
+  const [displayedInput, setDisplayedInput] = useState(null)
+  const componentRef = useRef(null);
+  const classes = displayedInput ? 'open' : 'closed';
+  const clickHandler = (component) => {
+    if (component) setDisplayedInput(component);
+    else setDisplayedInput(null);
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (componentRef.current && !componentRef.current.contains(e.target)) {
+        clickHandler();
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  })
+  return (
+    <div ref={componentRef} className={"style panel " + classes}>
+      <label className="color" autoFocus htmlFor="color">Color</label>
+      <input type="color" name="color" id="color" onClick={() => clickHandler()} />
+      <button className="font" onClick={() => clickHandler(<StyleFont ></StyleFont>)}></button>
+      <button className="font-size" onClick={() => clickHandler(<StyleFontSize ></StyleFontSize>)}></button>
+      {displayedInput}
+    </div>
+  )
+}
+function StyleFont() {
+  return (
+    <div className="style-input">
+      <label className="font" htmlFor="font">Font</label>
+      <select name="font" id="font"></select>
+    </div>
+  )
+}
+function StyleFontSize() {
+  const [fontSize, setFontSize] = useState(20);
+  return (
+    <div className="style-input">
+      <label className="font-size" htmlFor="font-size">Font Size</label>
+      <input type="range" name="font-size" id="font-size" min="12" max="32" defaultValue="20" onChange={(e) => setFontSize(e.target.value)} />
+      <span>{fontSize}<span className="unit-label">px</span></span>
     </div>
   )
 }
