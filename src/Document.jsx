@@ -15,7 +15,7 @@ function setOnEditClick(value) {
   onEditClick = value;
 }
 
-export default function Document({ onEditClick, color, font, fontSize }) {
+export default function Document({ onEditClick, color, fontSize }) {
   const [sections, setSections] = useState([])
   const [nextId, setNextId] = useState(0);
   const fontSizeValue = `${fontSize}px`

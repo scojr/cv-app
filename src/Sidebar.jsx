@@ -59,11 +59,11 @@ export default function Sidebar({
 
   return (
     <>
-      <StyleBar onColorChange={onColorChange} onFontChange={onFontChange} onFontSizeChange={onFontSizeChange}></StyleBar>
       <div style={{ '--custom-width': sidebarWidth }} className={'sidebar-container' + swapClass}>
         <div onMouseDown={(e) => handleDivider(e, sidesSwapped)} className={'divider' + swapClass} ></div>
         <div className={'sidebar'}>
-          <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button></header>
+          <header><button onClick={() => setSidesSwapped(!sidesSwapped)}></button>
+            <StyleBar onColorChange={onColorChange} onFontChange={onFontChange} onFontSizeChange={onFontSizeChange}></StyleBar></header>
           {panelData(elementData)}
         </div >
       </div>
@@ -176,23 +176,14 @@ function StyleBar({
     }
   })
   return (
-    <div ref={componentRef} className={"style panel " + classes}>
+    <div ref={componentRef} className={"style " + classes}>
       <label style={{ "--label-color": color }} className="color" autoFocus htmlFor="color">Color</label>
       <input type="color" name="color" id="color" value={color} onChange={(e) => {
         onColorChange(e.target.value);
         setColor(e.target.value)
       }} onClick={() => clickHandler()} />
-      <button className="font" onClick={() => clickHandler(<StyleFont onFontChange ></StyleFont>)}></button>
       <button className="font-size" onClick={() => clickHandler(<StyleFontSize onFontSizeChange={onFontSizeChange} ></StyleFontSize>)}></button>
       {displayedInput}
-    </div>
-  )
-}
-function StyleFont({ onFontChange }) {
-  return (
-    <div className="style-input">
-      <label className="font" htmlFor="font">Font</label>
-      <select name="font" id="font" onChange={(e) => onFontChange(e.target.value)}></select>
     </div>
   )
 }

@@ -47,10 +47,11 @@ aside:hover {
 }
 
 aside {
+  --aside-color: #5f8fbb;
   padding: 2rem;
-  background-color: var(--accent-color);
   background-color: var(--aside-color);
   color: white;
+
 
   section {
     margin-bottom: 1rem;
@@ -111,6 +112,7 @@ main {
     }
   }
 }
+
 
 .avatar {
   aspect-ratio: 1/1;
