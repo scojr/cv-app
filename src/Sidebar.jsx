@@ -135,8 +135,9 @@ function ListInput({ initialValue, index, listId, entryId, onDeleteClick }) {
 
   return (
     <>
-      <button className='list-options' onClick={() => onDeleteClick(entryId)}></button>
       <textarea type="text" value={value} name="" id="" onChange={(e) => onChange(e.target.value)} />
+
+      <button className='list-options' onClick={() => onDeleteClick(entryId)}></button>
     </>
   )
 }
