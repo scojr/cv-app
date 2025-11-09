@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import '../styles/Properties.css'
 
-const categories = [<General></General>, <Employment></Employment>, <Education></Education>]
+export default function PropertiesPanel({ data }) {
 
-export default function PropertiesPanel() {
   const [width, setWidth] = useState('600px');
   const [category, setCategory] = useState(0);
+
+  const categories = [<General data={data.user}></General>, <Employment data={data.experience}></Employment>, <Education data={data.education}></Education>]
+
   return (
     <>
       <div style={{ '--custom-width': width }} className={'sidebar-container'}>
@@ -60,56 +62,59 @@ function Panel({ children, name }) {
   )
 }
 
-function General({ name = "General" }) {
+function General({ name = "General", data }) {
   return (
     <>
       <Panel name={name} >
         <fieldset className="entry">
           <label htmlFor="name-input">Name</label>
-          <input type="text" id="name-input" />
+          <input type="text" id="name-input" value={data.name} />
           <label htmlFor="name-input">Title</label>
-          <input type="text" id="title-input" />
+          <input type="text" id="title-input" value={data.title} />
           <label htmlFor="profile">Profile</label>
-          <textarea name="" id="profile"></textarea>
+          <textarea name="" id="profile" value={data.about}></textarea>
         </fieldset>
       </Panel>
       <Panel name={"Contact"} >
         <fieldset className="entry">
-          <label htmlFor="email-input">Email</label>
-          <input type="text" id="email-input" />
           <label htmlFor="phone-input">Phone</label>
-          <input type="text" id="phone-input" />
+          <input type="text" id="phone-input" value={data.phone} />
+          <label htmlFor="email-input">Email</label>
+          <input type="text" id="email-input" value={data.email} />
           <label htmlFor="phone-input">Website</label>
-          <input type="text" id="website-input" />
+          <input type="text" id="website-input" value={data.website} />
         </fieldset>
       </Panel>
     </>
   )
 }
 
-function Employment({ name = "Experience" }) {
+function Employment({ data, name = "Experience" }) {
+  const entries = data.map((item, index) => <Entry key={index} data={item} name={("Company")} isDescription={true}></Entry>)
   return (
     <Panel name={name}>
-      <Entry name={"Company"} isDescription={true}></Entry>
+      {entries}
     </Panel>
   )
 }
 
-function Education({ name = "Education" }) {
+function Education({ data, name = "Education" }) {
+  const entries = data.map((item, index) => <Entry key={index} data={item} name={("School")}></Entry>)
   return (
     <Panel name={name}>
-      <Entry name={"School"}></Entry>
+      {entries}
     </Panel>
   )
 }
 
-function Entry({ name, isDescription }) {
+function Entry({ data, name, isDescription }) {
+  console.log(data)
   const [visibility, setVisibility] = useState(true);
   const toggleVisibility = () => setVisibility(!visibility);
   const description =
     <fieldset>
       <label htmlFor="job-description">Description</label>
-      <textarea name="" id="job-description"></textarea>
+      <textarea name="" id="job-description" value={data.description}></textarea>
     </fieldset>
   if (!visibility) return (
     <>
@@ -120,7 +125,7 @@ function Entry({ name, isDescription }) {
         <div className="entry-content">
           <fieldset>
             <label htmlFor="company">{name}</label>
-            <input type="text" id="company" />
+            <input type="text" id="company" value={data.place} />
           </fieldset>
         </div>
       </div>
@@ -135,18 +140,18 @@ function Entry({ name, isDescription }) {
         <div className="entry-content">
           <fieldset>
             <label htmlFor="company">{name}</label>
-            <input type="text" id="company" />
+            <input type="text" id="company" value={data.place} />
             <label htmlFor="job-title">Title</label>
-            <input type="text" id="job-title" />
+            <input type="text" id="job-title" value={data.title} />
           </fieldset>
           <div className="row">
             <fieldset>
               <label htmlFor="date-start">From</label>
-              <input type="number" id="date-start" />
+              <input type="text" id="date-start" value={data.from} />
             </fieldset>
             <fieldset>
               <label htmlFor="date-end">To</label>
-              <input type="text" id="date-end" />
+              <input type="text" id="date-end" value={data.to} />
             </fieldset>
           </div>
           {isDescription ? description : null}
