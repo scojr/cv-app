@@ -12,46 +12,17 @@
   overflow: hidden;
 }
 
-button.add-entry-body,
-button.add-entry-side {
-  width: 3vw;
-  height: 3vw;
-  border-radius: 0.5rem;
-  border: 1px solid darkgray;
-  background-color: white;
-  background-image: url('../assets/plus-thick.svg');
-  background-size: 60%;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-left: calc(50% - 1.5vw);
-  margin-top: 1rem;
-  opacity: 30%;
-  visibility: hidden;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-
-  &:hover {
-    opacity: 100%;
-  }
-}
-
-main:hover {
-  >button.add-entry-body {
-    visibility: visible;
-  }
-}
-
-aside:hover {
-  >button.add-entry-side {
-    visibility: visible;
-  }
-}
-
 aside {
   --aside-color: #5f8fbb;
   padding: 2rem;
   background-color: var(--aside-color);
   color: white;
 
+
+  h2 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid white;
+  }
 
   section {
     margin-bottom: 1rem;
@@ -72,27 +43,36 @@ aside {
 
 main {
   padding: 1rem;
+  padding-left: 0;
+
+  h2 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--accent-color);
+  }
 
   header {
     h1 {
-      font-size: calc(var(--font-size) * 3.4);
+      font-size: 3.4rem;
     }
 
     h2 {
-      font-size: calc(var(--font-size) * 1.6);
+      font-size: 1.6rem;
+      border-bottom: none;
     }
 
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   section {
     margin-top: 1rem;
 
-    h3 {
-      font-size: calc(var(--font-size) * 1.4);
-      font-weight: bold;
-      margin-bottom: 0.5rem;
+    h2 {
+      margin-bottom: 1rem;
     }
+  }
+
+  p {
+    margin-top: 0.5rem;
   }
 
   .separator {
@@ -100,6 +80,34 @@ main {
     width: calc(100% - 1rem);
     margin-left: 0rem;
   }
+}
+
+.entry {
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h3 {
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    margin-top: 0.25rem;
+  }
+
+  margin-bottom: 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
 }
 
 aside,
@@ -128,88 +136,4 @@ main {
 
 .avatar:hover {
   background-blend-mode: multiply;
-}
-
-section,
-header {
-  position: relative;
-}
-
-section.headless {
-  >.separator {
-    display: none;
-  }
-}
-
-section:hover::after {
-  position: absolute;
-  width: calc(100% + 1rem);
-  height: calc(100% + 1rem);
-  top: -0.5rem;
-  left: -0.5rem;
-  content: '';
-  border: 2px dashed black;
-  border-radius: 0.5rem;
-}
-
-.edit-buttons {
-  z-index: 1;
-  position: absolute;
-  display: flex;
-  gap: .5rem;
-  top: 0rem;
-  right: 0rem;
-
-  button {
-    width: 0.5rem;
-    height: 0.5rem;
-    padding: 0.5rem;
-    background-color: white;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 75%;
-    border: 1px solid darkgray;
-    border-radius: 0.25rem;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-  }
-
-  .edit {
-    background-image: url('../assets/edit.svg');
-
-    &:hover {
-      background-color: gainsboro;
-
-      &::after {
-        content: "Edit Entry";
-        color: black;
-      }
-    }
-  }
-
-  .delete {
-    background-image: url('../assets/trash.svg');
-
-    &:hover {
-      background-color: IndianRed;
-
-      border: 1px solid gray;
-
-      &::after {
-        content: "Delete Entry";
-        color: black;
-      }
-    }
-  }
-}
-
-.edit::after,
-.delete::after {
-  position: absolute;
-  top: -2.5rem;
-  right: -0.5rem;
-  white-space: nowrap;
-  background-color: white;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  border: 1px solid darkgray;
 }

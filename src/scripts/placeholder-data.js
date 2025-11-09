@@ -1,51 +1,29 @@
-const placeholderSections = {
-  main: [
-    {
-      heading: 'Profile',
-      text: 'Results-driven web developer with 5+ years of experience designing and implementing responsive websites and applications. Skilled in modern front-end frameworks, backend systems, and UI/UX design. Adept at translating client needs into efficient digital solutions.',
-      list: [],
-    },
-    {
-      heading: 'Experience',
-      text: 'Ipsum Solutions 2030 - Present',
-      list: ['Developed and maintained client-facing applications using React and Tailwind CSS.', 'Improved site performance by 30% through optimized code and image handling.', 'Collaborated with designers and backend developers to launch projects on schedule.'],
-    },
-    {
-      heading: ' ',
-      text: 'LoremTech 2025 - 2029',
-      list: ['Built over 20 responsive websites for small businesses and startups.',
-        'Integrated APIs for payment systems, booking platforms, and data visualization.',
-        'Provided ongoing client support, reducing reported issues by 40%.'],
-    },
-  ],
-  aside: [
-    {
-      heading: 'Contact',
-      text: ' ',
-      list: ['123-555-1234', 'email@thiswebsite.com', 'www.theodinproject.com'],
-    },
-    {
-      heading: 'Skills',
-      text: ' ',
-      list: ['Project Management', 'Teamwork', 'Leadership', 'Effective Communication',],
-    },
-    {
-      heading: 'References',
-      text: 'Jaime Trout',
-      list: ['Phone: 123-456-7890', 'Email: email@thiswebsite.com'],
-    },
-    {
-      heading: ' ',
-      text: 'Bill Grayson',
-      list: ['Phone: 123-456-7890', 'Email: email@thiswebsite.com'],
-    },
-  ],
+class Entry {
+  constructor(place, title, from, to, description) {
+    this.place = place;
+    this.title = title;
+    this.from = from;
+    this.to = to;
+    this.description = description;
+  }
 }
 
-const newSectionTemplate = {
-  heading: 'New Section',
-  text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-  list: [],
+const placeholderProfile = {
+  user: {
+    name: "John Doe",
+    title: "Web Developer",
+    email: "john@website.com",
+    phone: "555-555-5555",
+    website: "www.theodinproject.com",
+    about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  experience: [
+    new Entry('Tech Studios', 'Front-End Developer', '2030', 'Present', 'Built and maintained responsive web interfaces using React and Tailwind CSS.'),
+    new Entry('Light Solutions', 'Web Developer Intern', '2025', '2030', 'Developed custom WordPress themes and landing pages for client websites.')
+  ],
+  education: [
+    new Entry('University of California, Berkeley', 'Bachelor of Science in Computer Science', '2027', '2031'),
+  ]
 }
 
-export { placeholderSections, newSectionTemplate };
+export { placeholderProfile };

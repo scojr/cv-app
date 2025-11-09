@@ -62,18 +62,28 @@ function Panel({ children, name }) {
 
 function General({ name = "General" }) {
   return (
-    <Panel name={name} >
-      <fieldset className="entry">
-        <label htmlFor="name-input">Name</label>
-        <input type="text" id="name-input" />
-        <label htmlFor="email-input">Email</label>
-        <input type="text" id="email-input" />
-        <label htmlFor="phone-input">Phone</label>
-        <input type="text" id="phone-input" />
-        <label htmlFor="profile">Profile</label>
-        <textarea name="" id="profile"></textarea>
-      </fieldset>
-    </Panel>
+    <>
+      <Panel name={name} >
+        <fieldset className="entry">
+          <label htmlFor="name-input">Name</label>
+          <input type="text" id="name-input" />
+          <label htmlFor="name-input">Title</label>
+          <input type="text" id="title-input" />
+          <label htmlFor="profile">Profile</label>
+          <textarea name="" id="profile"></textarea>
+        </fieldset>
+      </Panel>
+      <Panel name={"Contact"} >
+        <fieldset className="entry">
+          <label htmlFor="email-input">Email</label>
+          <input type="text" id="email-input" />
+          <label htmlFor="phone-input">Phone</label>
+          <input type="text" id="phone-input" />
+          <label htmlFor="phone-input">Website</label>
+          <input type="text" id="website-input" />
+        </fieldset>
+      </Panel>
+    </>
   )
 }
 

@@ -73,7 +73,17 @@
 
   header {
     font-weight: bold;
-    text-align: center;
+    position: relative;
+
+    h2 {
+      position: relative;
+      top: 0.9rem;
+      z-index: 1;
+      background-color: white;
+      width: min-content;
+      padding: 0 1rem;
+      margin: 0 auto;
+    }
   }
 
   label,
@@ -81,6 +91,7 @@
     margin-bottom: 0.25rem;
   }
 }
+
 
 .panel .entry {
   position: relative;
@@ -127,7 +138,7 @@ input {
 }
 
 textarea {
-  height: 400px;
+  height: 100px;
   margin-bottom: 0.5rem;
 }
 
@@ -153,6 +164,7 @@ fieldset {
   display: flex;
   flex-direction: column;
   border: none;
+  margin-bottom: 1rem;
 }
 
 div.row {
