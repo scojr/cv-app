@@ -23,7 +23,7 @@
     padding: 0 0.3rem;
 
     button {
-      background-image: url('./assets/swap-horizontal.svg');
+      background-image: url('../assets/swap-horizontal.svg');
       width: 1rem;
       height: 1rem;
       background-color: white;
@@ -133,7 +133,7 @@ fieldset {
 
     button.list-options {
       position: absolute;
-      background-image: url('./assets/trash.svg');
+      background-image: url('../assets/trash.svg');
       background-position: center;
       background-repeat: no-repeat;
       background-size: 100%;
@@ -185,7 +185,6 @@ fieldset {
     border: 1px solid darkgray;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px 1px inset;
 
-    /* background-image: url('./assets/plus-thick.svg'); */
     &::after {
       position: absolute;
       width: 1rem;
@@ -194,7 +193,7 @@ fieldset {
       left: 50%;
       bottom: 50%;
       transform: translateX(-50%) translateY(50%);
-      background-image: url('./assets/plus-thick.svg');
+      background-image: url('../assets/plus-thick.svg');
       opacity: 70%;
     }
   }
@@ -234,7 +233,7 @@ fieldset {
     cursor: pointer;
 
     &.font-size {
-      background-image: url('./assets/format-size.svg');
+      background-image: url('../assets/format-size.svg');
       background-size: 95%;
     }
 

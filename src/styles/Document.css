@@ -19,7 +19,7 @@ button.add-entry-side {
   border-radius: 0.5rem;
   border: 1px solid darkgray;
   background-color: white;
-  background-image: url('./assets/plus-thick.svg');
+  background-image: url('../assets/plus-thick.svg');
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
@@ -118,7 +118,7 @@ main {
   aspect-ratio: 1/1;
   border-radius: 100%;
   background-color: rgb(221, 221, 221);
-  background-image: url('./assets/avatar-placeholder.jpg');
+  background-image: url('../assets/avatar-placeholder.jpg');
   background-position: center;
   background-size: contain;
   border: 0.25rem solid white;
@@ -174,7 +174,7 @@ section:hover::after {
   }
 
   .edit {
-    background-image: url('./assets/edit.svg');
+    background-image: url('../assets/edit.svg');
 
     &:hover {
       background-color: gainsboro;
@@ -187,7 +187,7 @@ section:hover::after {
   }
 
   .delete {
-    background-image: url('./assets/trash.svg');
+    background-image: url('../assets/trash.svg');
 
     &:hover {
       background-color: IndianRed;

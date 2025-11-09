@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import { getListFromId } from './list-handler';
-import './Sidebar.css'
+import { getListFromId } from '../scripts/list-handler';
+import '../styles/Sidebar.css'
 
 let onHeaderChange;
 function setOnHeaderChange(value) {

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { newList, getListFromId } from './list-handler';
-import { placeholderSections, newSectionTemplate } from './placeholder-data';
+import { newList, getListFromId } from '../scripts/list-handler';
+import { placeholderSections, newSectionTemplate } from '../scripts/placeholder-data';
 
-import './Document.css'
+import '../styles/Document.css'
 
 const user = {
   name: 'John Doe',
