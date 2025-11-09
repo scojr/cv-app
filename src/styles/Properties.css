@@ -1,0 +1,89 @@
+.sidebar-container {
+  display: flex;
+  width: var(--custom-width);
+  min-width: 400px;
+  max-width: calc(100vw - (100vh / 1.284));
+
+  .divider.swap {
+    order: 1;
+  }
+}
+
+.sidebar {
+  background-color: snow;
+  width: 100%;
+
+  .properties-header {
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-bottom: 1px solid gray;
+    padding: 0.5rem;
+  }
+}
+
+.sidebar-container.swap header {
+  flex-direction: row-reverse;
+}
+
+.panel {
+  position: relative;
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+    button {
+      background-image: url('../assets/chevron-up.svg');
+      width: 1rem;
+      height: 1rem;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 80%;
+    }
+  }
+}
+
+input,
+textarea {
+  font-size: 1rem;
+  padding: 0.2ch 0.5ch;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #e2e3e4;
+  height: 2rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+
+  &:focus {
+    background-color: white;
+  }
+}
+
+.divider {
+  position: relative;
+  width: 2px;
+  height: 100%;
+  background-color: darkgray;
+  cursor: ew-resize;
+  pointer-events: all;
+}
+
+.divider:hover {
+  background-color: black;
+}
+
+
+.divider.swap {
+  order: -1;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
