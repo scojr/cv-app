@@ -16,7 +16,6 @@
   .properties-header {
     font-size: 1.3rem;
     font-weight: bold;
-    border-bottom: 1px solid rgb(197, 197, 197);
     background-color: #f1f1f1;
 
     .header-buttons {
@@ -26,21 +25,27 @@
 
     button {
       position: relative;
-      min-height: 2rem;
+      min-height: 1.5rem;
       width: 100%;
+      padding: 0.25rem 0;
       background-position: center;
+      background-size: auto;
       background-repeat: no-repeat;
-      margin: 0.25rem 0;
+      border-bottom: 1px solid rgb(197, 197, 197);
+    }
+
+    button.active {
+      border-bottom: 1px solid #5f8fbb;
     }
 
     button.active::after {
       position: absolute;
       left: 0;
-      bottom: -0.25rem;
+      bottom: 0rem;
       background-color: #5f8fbb;
       content: "";
       width: 100%;
-      height: 0.25rem;
+      height: 0.15rem;
     }
 
     .edit-general {
@@ -54,10 +59,6 @@
     .edit-education {
       background-image: url("../assets/school-outline.svg");
     }
-
-    .edit-style {
-      background-image: url("../assets/palette-outline.svg");
-    }
   }
 }
 
@@ -67,7 +68,7 @@
 
 .panel {
   position: relative;
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0.5rem;
   padding-bottom: 0rem;
 
   header {
@@ -79,10 +80,6 @@
   header {
     margin-bottom: 0.25rem;
   }
-}
-
-.panel:has(.entry) {
-  padding: 0.25rem 0.5rem;
 }
 
 .panel .entry {

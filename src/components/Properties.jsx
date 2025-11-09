@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../styles/Properties.css'
 
-const categories = [<GeneralEntry></GeneralEntry>, <EmploymentEntry></EmploymentEntry>, <EducationEntry></EducationEntry>]
+const categories = [<General></General>, <Employment></Employment>, <Education></Education>]
 
 export default function PropertiesPanel() {
   const [width, setWidth] = useState('600px');
@@ -25,7 +25,6 @@ function Header({ category, setCategory }) {
     { id: 0, name: "edit-general" },
     { id: 1, name: "edit-experience" },
     { id: 2, name: "edit-education" },
-    { id: 3, name: "edit-style" },
   ]
 
   const getActiveClass = (num) => {
@@ -61,10 +60,10 @@ function Panel({ children, name }) {
   )
 }
 
-function GeneralEntry({ name = "General" }) {
+function General({ name = "General" }) {
   return (
     <Panel name={name} >
-      <fieldset>
+      <fieldset className="entry">
         <label htmlFor="name-input">Name</label>
         <input type="text" id="name-input" />
         <label htmlFor="email-input">Email</label>
@@ -78,34 +77,54 @@ function GeneralEntry({ name = "General" }) {
   )
 }
 
-function EmploymentEntry({ name = "Experience" }) {
+function Employment({ name = "Experience" }) {
+  return (
+    <Panel name={name}>
+      <Entry name={"Company"} isDescription={true}></Entry>
+    </Panel>
+  )
+}
+
+function Education({ name = "Education" }) {
+  return (
+    <Panel name={name}>
+      <Entry name={"School"}></Entry>
+    </Panel>
+  )
+}
+
+function Entry({ name, isDescription }) {
   const [visibility, setVisibility] = useState(true);
   const toggleVisibility = () => setVisibility(!visibility);
-
+  const description =
+    <fieldset>
+      <label htmlFor="job-description">Description</label>
+      <textarea name="" id="job-description"></textarea>
+    </fieldset>
   if (!visibility) return (
-    <Panel name={name}>
+    <>
       <div className="entry">
         <div className="entry-header">
           <button className="collapse show" onClick={toggleVisibility}></button>
         </div>
         <div className="entry-content">
           <fieldset>
-            <label htmlFor="company">Company</label>
+            <label htmlFor="company">{name}</label>
             <input type="text" id="company" />
           </fieldset>
         </div>
       </div>
-    </Panel>
+    </>
   )
   return (
-    <Panel name={name}>
+    <>
       <div className="entry">
         <div className="entry-header">
           <button className="collapse hide" onClick={toggleVisibility}></button>
         </div>
         <div className="entry-content">
           <fieldset>
-            <label htmlFor="company">Company</label>
+            <label htmlFor="company">{name}</label>
             <input type="text" id="company" />
             <label htmlFor="job-title">Title</label>
             <input type="text" id="job-title" />
@@ -120,22 +139,10 @@ function EmploymentEntry({ name = "Experience" }) {
               <input type="text" id="date-end" />
             </fieldset>
           </div>
-          <fieldset>
-            <label htmlFor="job-description">Description</label>
-            <textarea name="" id="job-description"></textarea>
-          </fieldset>
+          {isDescription ? description : null}
         </div>
       </div>
-    </Panel>
-  )
-}
-
-function EducationEntry({ name = "Education" }) {
-  return (
-    <Panel name={name} >
-      <fieldset>
-      </fieldset>
-    </Panel>
+    </>
   )
 }
 
