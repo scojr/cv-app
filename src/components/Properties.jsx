@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import '../styles/Properties.css'
 
-export default function PropertiesPanel({ data }) {
+export default function PropertiesPanel({ data, onChange }) {
 
   const [width, setWidth] = useState('600px');
   const [category, setCategory] = useState(0);
 
-  const categories = [<General data={data.user}></General>, <Employment data={data.experience}></Employment>, <Education data={data.education}></Education>]
+  const categories = [<General data={data.user} onChange={onChange}></General>, <Employment data={data.experience} onChange={onChange}></Employment>, <Education data={data.education} onChange={onChange}></Education>]
 
   return (
     <>
@@ -62,35 +62,51 @@ function Panel({ children, name }) {
   )
 }
 
-function General({ name = "General", data }) {
+function General({ name = "General", data, onChange }) {
+
+  const onTextChange = (type, e) => {
+    const value = e.target.value;
+    onChange('user', type, value);
+  }
+
   return (
     <>
       <Panel name={name} >
         <fieldset className="entry">
           <label htmlFor="name-input">Name</label>
-          <input type="text" id="name-input" value={data.name} />
+          <input type="text" id="name-input" value={data.name} onChange={(e) => onTextChange("name", e)} />
           <label htmlFor="name-input">Title</label>
-          <input type="text" id="title-input" value={data.title} />
+          <input type="text" id="title-input" value={data.title} onChange={(e) => onTextChange("title", e)} />
           <label htmlFor="profile">Profile</label>
-          <textarea name="" id="profile" value={data.about}></textarea>
+          <textarea name="" id="profile" value={data.about} onChange={(e) => onTextChange("about", e)} ></textarea>
         </fieldset>
       </Panel>
       <Panel name={"Contact"} >
         <fieldset className="entry">
           <label htmlFor="phone-input">Phone</label>
-          <input type="text" id="phone-input" value={data.phone} />
+          <input type="text" id="phone-input" value={data.phone} onChange={(e) => onTextChange("phone", e)} />
           <label htmlFor="email-input">Email</label>
-          <input type="text" id="email-input" value={data.email} />
-          <label htmlFor="phone-input">Website</label>
-          <input type="text" id="website-input" value={data.website} />
+          <input type="text" id="email-input" value={data.email} onChange={(e) => onTextChange("email", e)} />
+          <label htmlFor="website-input">Website</label>
+          <input type="text" id="website-input" value={data.website} onChange={(e) => onTextChange("website", e)} />
         </fieldset>
       </Panel>
     </>
   )
 }
 
-function Employment({ data, name = "Experience" }) {
-  const entries = data.map((item, index) => <Entry key={index} data={item} name={("Company")} isDescription={true}></Entry>)
+function Employment({ data, name = "Experience", onChange }) {
+
+  const entriesNew = () => {
+    const entriesArray = [];
+    for (let i = 0; i < data.length; i++) {
+      const index = i;
+      const entry = data[index];
+      entriesArray.push(<Entry key={entry.id} id={entry.id.slice(0, 8)} index={index} parent={entry} data={entry} name={("Company")} type={"experience"} isDescription={true} onChange={onChange}></Entry>)
+    };
+    return (entriesArray);
+  };
+  const entries = entriesNew();
   return (
     <Panel name={name}>
       {entries}
@@ -98,8 +114,17 @@ function Employment({ data, name = "Experience" }) {
   )
 }
 
-function Education({ data, name = "Education" }) {
-  const entries = data.map((item, index) => <Entry key={index} data={item} name={("School")}></Entry>)
+function Education({ data, name = "Education", onChange }) {
+  const entriesNew = () => {
+    const entriesArray = [];
+    for (let i = 0; i < data.length; i++) {
+      const index = i;
+      const entry = data[index];
+      entriesArray.push(<Entry key={entry.id} id={entry.id} index={index} parent={entry} data={entry} name={("School")} type={"education"} onChange={onChange}></Entry>)
+    };
+    return (entriesArray);
+  };
+  const entries = entriesNew();
   return (
     <Panel name={name}>
       {entries}
@@ -107,14 +132,21 @@ function Education({ data, name = "Education" }) {
   )
 }
 
-function Entry({ data, name, isDescription }) {
-  console.log(data)
+function Entry({ id, parent, data, name, type, index, isDescription = false, onChange }) {
+  const entryInfo = { type, index };
   const [visibility, setVisibility] = useState(true);
   const toggleVisibility = () => setVisibility(!visibility);
+
+  const onTextChange = (type, name, e) => {
+    const value = e.target.value;
+    console.log(parent)
+    onChange(entryInfo, name, value);
+  }
+
   const description =
     <fieldset>
-      <label htmlFor="job-description">Description</label>
-      <textarea name="" id="job-description" value={data.description}></textarea>
+      <label htmlFor={"job-description" + id}>Description</label>
+      <textarea name="" id={"job-description" + id} value={data.description} onChange={(e) => onTextChange(type, "description", e)} ></textarea>
     </fieldset>
   if (!visibility) return (
     <>
@@ -124,8 +156,8 @@ function Entry({ data, name, isDescription }) {
         </div>
         <div className="entry-content">
           <fieldset>
-            <label htmlFor="company">{name}</label>
-            <input type="text" id="company" value={data.place} />
+            <label htmlFor={"company" + id}>{name}</label>
+            <input type="text" id={"company" + id} value={data.place} onChange={(e) => onTextChange(type, "place", e)} />
           </fieldset>
         </div>
       </div>
@@ -139,19 +171,19 @@ function Entry({ data, name, isDescription }) {
         </div>
         <div className="entry-content">
           <fieldset>
-            <label htmlFor="company">{name}</label>
-            <input type="text" id="company" value={data.place} />
-            <label htmlFor="job-title">Title</label>
-            <input type="text" id="job-title" value={data.title} />
+            <label htmlFor={"company" + id}>{name}</label>
+            <input type="text" id={"company" + id} value={data.place} onChange={(e) => onTextChange(type, "place", e)} />
+            <label htmlFor={"job-title" + id}>Title</label>
+            <input type="text" id={"job-title" + id} value={data.title} onChange={(e) => onTextChange(type, "title", e)} />
           </fieldset>
           <div className="row">
             <fieldset>
-              <label htmlFor="date-start">From</label>
-              <input type="text" id="date-start" value={data.from} />
+              <label htmlFor={"date-start" + id}>From</label>
+              <input type="text" id={"date-start" + id} value={data.from} onChange={(e) => onTextChange(type, "from", e)} />
             </fieldset>
             <fieldset>
-              <label htmlFor="date-end">To</label>
-              <input type="text" id="date-end" value={data.to} />
+              <label htmlFor={"date-end" + id}>To</label>
+              <input type="text" id={"date-end" + id} value={data.to} onChange={(e) => onTextChange(type, "to", e)} />
             </fieldset>
           </div>
           {isDescription ? description : null}
