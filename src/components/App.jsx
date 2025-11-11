@@ -2,7 +2,7 @@ import '../styles/App.css'
 import Document from './Document'
 import PropertiesPanel from './Properties'
 import { useState } from 'react'
-import { user, experience, education } from '../scripts/placeholder-data'
+import { user, experience, education, Entry } from '../scripts/placeholder-data'
 
 
 function App() {
@@ -12,7 +12,6 @@ function App() {
   const data = { user: userData, experience: experienceData, education: educationData };
 
   function onChange(cat, type, newData) {
-    console.log(cat, type)
     if (cat === "user") {
       setUserData({
         ...userData,
@@ -39,6 +38,17 @@ function App() {
         setData = setEducationData;
       }
       const newArray = array.toSpliced(cat.index, 1);
+      setData(newArray);
+    }
+    if (type === "add entry") {
+      let array = experienceData;
+      let setData = setExperienceData;
+      if (cat === "education") {
+        array = educationData;
+        setData = setEducationData;
+      }
+      const newArray = array.slice();
+      newArray.push(new Entry);
       setData(newArray);
     }
   }

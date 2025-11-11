@@ -1,5 +1,5 @@
 class Entry {
-  constructor(place, title, from, to, description) {
+  constructor(place = '', title = '', from = '', to = '', description = '') {
     this.place = place;
     this.title = title;
     this.from = from;
@@ -28,4 +28,4 @@ const education = [
   new Entry('University of California, Berkeley', 'Bachelor of Science in Computer Science', '2027', '2031'),
 ]
 
-export { user, experience, education };
+export { user, experience, education, Entry };

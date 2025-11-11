@@ -2,11 +2,14 @@ import { useState } from 'react'
 import '../styles/Properties.css'
 
 export default function PropertiesPanel({ data, onChange }) {
-
   const [width, setWidth] = useState('600px');
   const [category, setCategory] = useState(0);
 
-  const categories = [<General data={data.user} onChange={onChange}></General>, <Employment data={data.experience} onChange={onChange}></Employment>, <Education data={data.education} onChange={onChange}></Education>]
+  const addEntry = (cat) => {
+    onChange(cat, 'add entry');
+  }
+
+  const categories = [<General data={data.user} onChange={onChange}></General>, <Employment data={data.experience} onChange={onChange} addEntry={addEntry}></Employment>, <Education data={data.education} onChange={onChange} addEntry={addEntry}></Education>]
 
   return (
     <>
@@ -95,7 +98,7 @@ function General({ name = "General", data, onChange }) {
   )
 }
 
-function Employment({ data, name = "Experience", onChange }) {
+function Employment({ data, name = "Experience", onChange, addEntry }) {
 
   const entriesNew = () => {
     const entriesArray = [];
@@ -110,11 +113,14 @@ function Employment({ data, name = "Experience", onChange }) {
   return (
     <Panel name={name}>
       {entries}
+      <div className="add-entry button-container">
+        <button className="add-entry" onClick={() => { addEntry('experience') }}>New Entry</button>
+      </div>
     </Panel>
   )
 }
 
-function Education({ data, name = "Education", onChange }) {
+function Education({ data, name = "Education", onChange, addEntry }) {
   const entriesNew = () => {
     const entriesArray = [];
     for (let i = 0; i < data.length; i++) {
@@ -128,11 +134,14 @@ function Education({ data, name = "Education", onChange }) {
   return (
     <Panel name={name}>
       {entries}
+      <div className="add-entry button-container">
+        <button className="add-entry" onClick={() => { addEntry('education') }}>New Entry</button>
+      </div>
     </Panel>
   )
 }
 
-function Entry({ id, parent, data, name, type, index, isDescription = false, onChange }) {
+function Entry({ id, data, name, type, index, isDescription = false, onChange }) {
   const entryInfo = { type, index };
   const [visibility, setVisibility] = useState(true);
   const [isConfirmDelete, setIsConfirmDelete] = useState(false);
@@ -148,7 +157,6 @@ function Entry({ id, parent, data, name, type, index, isDescription = false, onC
 
   const onTextChange = (type, name, e) => {
     const value = e.target.value;
-    console.log(parent)
     onChange(entryInfo, name, value);
   }
 
