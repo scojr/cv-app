@@ -1,15 +1,28 @@
+import { useState } from 'react'
 import '../styles/Document.css'
 
 export default function Document({ color, data }) {
-
-
+  const [avatar, setAvatar] = useState(null);
   const experience = data.experience.map((item, index) => <Entry key={index} data={item}></Entry>);
   const education = data.education.map((item, index) => <Entry key={index} data={item}></Entry>);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setAvatar(e.target.result);
+    }
+    reader.readAsDataURL(file);
+  }
 
   return (
     <div className="document" >
       <aside style={{ "--aside-color": color }}>
-        <div className="avatar"></div>
+        <div className="avatar" style={avatar ? { backgroundImage: `url("${avatar}")` } : null}>
+          <label htmlFor="imageInput"></label>
+          <input type="file" id="imageInput" accept='image/' onChange={(event) => handleImageUpload(event)} />
+        </div>
         <Contact data={data.user}></Contact>
       </aside>
       <main>
