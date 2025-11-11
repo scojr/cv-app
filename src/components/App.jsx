@@ -31,6 +31,16 @@ function App() {
       newArray[index][type] = newData;
       setEducationData(newArray);
     }
+    if (type === "deletion") {
+      let array = experienceData;
+      let setData = setExperienceData;
+      if (cat.type === "education") {
+        array = educationData;
+        setData = setEducationData;
+      }
+      const newArray = array.toSpliced(cat.index, 1);
+      setData(newArray);
+    }
   }
 
   return (

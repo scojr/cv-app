@@ -135,7 +135,16 @@ function Education({ data, name = "Education", onChange }) {
 function Entry({ id, parent, data, name, type, index, isDescription = false, onChange }) {
   const entryInfo = { type, index };
   const [visibility, setVisibility] = useState(true);
+  const [isConfirmDelete, setIsConfirmDelete] = useState(false);
   const toggleVisibility = () => setVisibility(!visibility);
+
+  const handleDeletePrompt = (deleteConfirmed) => {
+    setIsConfirmDelete(false);
+    if (!deleteConfirmed) return;
+    onChange(entryInfo, 'deletion', index);
+  }
+
+  const deletePrompt = isConfirmDelete ? <DeleteConfirm handleDeletePrompt={handleDeletePrompt}></DeleteConfirm> : null
 
   const onTextChange = (type, name, e) => {
     const value = e.target.value;
@@ -143,38 +152,48 @@ function Entry({ id, parent, data, name, type, index, isDescription = false, onC
     onChange(entryInfo, name, value);
   }
 
-  const description =
+  const description = (
     <fieldset>
       <label htmlFor={"job-description" + id}>Description</label>
       <textarea name="" id={"job-description" + id} value={data.description} onChange={(e) => onTextChange(type, "description", e)} ></textarea>
     </fieldset>
-  if (!visibility) return (
-    <>
-      <div className="entry">
-        <div className="entry-header">
-          <button className="collapse show" onClick={toggleVisibility}></button>
-          <button className="settings"></button>
-        </div>
-        <div className="entry-content">
-          <fieldset>
-            <label htmlFor={"company" + id}>{name}</label>
-            <input type="text" id={"company" + id} value={data.place} onChange={(e) => onTextChange(type, "place", e)} />
-          </fieldset>
-        </div>
-      </div>
-    </>
   )
+
+  const head = {
+    header: <>
+      <button className="collapse show" onClick={toggleVisibility}></button>
+      <button className="settings" onClick={() => setIsConfirmDelete(!isConfirmDelete)}></button>
+    </>,
+    content: <>
+      <label htmlFor={"company" + id}>{name}</label>
+      <input type="text" id={"company" + id} value={data.place} onChange={(e) => onTextChange(type, "place", e)} />
+    </>,
+  }
+  if (!visibility) return (
+    <div className={isConfirmDelete ? "entry delete" : "entry"}>
+      {deletePrompt}
+      <div className="entry-header">
+        {head.header}
+      </div>
+      <div className="entry-content">
+        <fieldset>
+          {head.content}
+        </fieldset>
+      </div>
+    </div>
+  );
   return (
     <>
-      <div className="entry">
+      <div className={isConfirmDelete ? "entry delete" : "entry"}>
+        {deletePrompt}
         <div className="entry-header">
-          <button className="collapse hide" onClick={toggleVisibility}></button>
-          <button className="settings"></button>
+          {head.header}
         </div>
         <div className="entry-content">
           <fieldset>
-            <label htmlFor={"company" + id}>{name}</label>
-            <input type="text" id={"company" + id} value={data.place} onChange={(e) => onTextChange(type, "place", e)} />
+            {head.content}
+          </fieldset>
+          <fieldset>
             <label htmlFor={"job-title" + id}>Title</label>
             <input type="text" id={"job-title" + id} value={data.title} onChange={(e) => onTextChange(type, "title", e)} />
           </fieldset>
@@ -192,6 +211,18 @@ function Entry({ id, parent, data, name, type, index, isDescription = false, onC
         </div>
       </div>
     </>
+  )
+}
+
+function DeleteConfirm({ handleDeletePrompt }) {
+  return (
+    <div className="confirm-delete">
+      <h2>Delete this entry?</h2>
+      <div className="buttons">
+        <button className="cancel" onClick={() => handleDeletePrompt(false)}>Cancel</button>
+        <button className="delete" onClick={() => handleDeletePrompt(true)}>Delete</button>
+      </div>
+    </div>
   )
 }
 
