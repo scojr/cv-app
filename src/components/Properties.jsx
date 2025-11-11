@@ -153,6 +153,7 @@ function Entry({ id, parent, data, name, type, index, isDescription = false, onC
       <div className="entry">
         <div className="entry-header">
           <button className="collapse show" onClick={toggleVisibility}></button>
+          <button className="settings"></button>
         </div>
         <div className="entry-content">
           <fieldset>
@@ -168,6 +169,7 @@ function Entry({ id, parent, data, name, type, index, isDescription = false, onC
       <div className="entry">
         <div className="entry-header">
           <button className="collapse hide" onClick={toggleVisibility}></button>
+          <button className="settings"></button>
         </div>
         <div className="entry-content">
           <fieldset>

@@ -101,16 +101,25 @@
 
   padding-bottom: 0rem;
 
-  button {
+  button.collapse,
+  button.settings {
     position: absolute;
     width: 1rem;
     height: 1rem;
-    background-image: url('../assets/chevron-up.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 80%;
     right: 0.5rem;
     top: 0.5rem;
+  }
+
+  button.collapse {
+    background-image: url('../assets/chevron-up.svg');
+    right: 2rem;
+  }
+
+  button.settings {
+    background-image: url('../assets/cog.svg');
   }
 
   button.show {
