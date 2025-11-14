@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr min-content;
   user-select: none;
-  width: 100vw;
 }
 
 #root:has(.swap) {
