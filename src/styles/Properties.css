@@ -226,33 +226,66 @@
   border-radius: 0.25rem;
   padding: 0.5rem;
   text-align: left;
-  padding-bottom: 0rem;
 
-  button.collapse,
-  button.settings {
+  .entry-header {
     position: absolute;
-    width: 1rem;
-    height: 1rem;
+    display: flex;
+    top: .35rem;
+    right: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .entry-header button {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+
+    &:hover {
+      background-color: gainsboro;
+    }
+  }
+
+  button.settings:hover {
+    background-color: rgb(255, 199, 199);
+  }
+
+  button::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 80%;
-    right: 0.5rem;
-    top: 0.5rem;
+    background-size: 90%;
   }
 
-  button.collapse {
+  button.settings:after {
+    background-image: url('../assets/trash.svg');
+  }
+
+  button.collapse:after {
     background-image: url('../assets/chevron-up.svg');
-    right: 2rem;
   }
 
-  button.settings {
-    background-image: url('../assets/close-thick.svg');
-    background-size: 60%;
-  }
-
-  button.show {
+  button.collapse.show:after {
     rotate: 180deg;
   }
+
+  button.collapse,
+  button.collapse.show {
+    &::after {
+      background-size: 140%;
+    }
+  }
+}
+
+.entry-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 input,
@@ -270,13 +303,8 @@ textarea {
   }
 }
 
-input {
-  margin-bottom: 0.5rem;
-}
-
 textarea {
   height: 100px;
-  margin-bottom: 0.5rem;
 }
 
 .divider {
@@ -292,7 +320,6 @@ textarea {
   background-color: black;
 }
 
-
 .divider.swap {
   order: -1;
 }
@@ -301,7 +328,6 @@ fieldset {
   display: flex;
   flex-direction: column;
   border: none;
-  margin-bottom: 1rem;
 }
 
 div.row {

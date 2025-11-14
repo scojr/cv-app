@@ -75,24 +75,41 @@ function General({ name = "General", data, onChange }) {
   return (
     <>
       <Panel name={name} >
-        <fieldset className="entry">
-          <label htmlFor="name-input">Name</label>
-          <input type="text" id="name-input" value={data.name} onChange={(e) => onTextChange("name", e)} />
-          <label htmlFor="name-input">Title</label>
-          <input type="text" id="title-input" value={data.title} onChange={(e) => onTextChange("title", e)} />
-          <label htmlFor="profile">Profile</label>
-          <textarea name="" id="profile" value={data.about} onChange={(e) => onTextChange("about", e)} ></textarea>
-        </fieldset>
+        <div className="entry">
+          <div className="entry-content">
+            <fieldset>
+              <label htmlFor="name-input">Name</label>
+              <input type="text" id="name-input" value={data.name} onChange={(e) => onTextChange("name", e)} />
+            </fieldset>
+
+            <fieldset>
+              <label htmlFor="name-input">Title</label>
+              <input type="text" id="title-input" value={data.title} onChange={(e) => onTextChange("title", e)} />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="profile">Profile</label>
+              <textarea name="" id="profile" value={data.about} onChange={(e) => onTextChange("about", e)} ></textarea>
+            </fieldset>
+          </div>
+        </div>
       </Panel>
       <Panel name={"Contact"} >
-        <fieldset className="entry">
-          <label htmlFor="phone-input">Phone</label>
-          <input type="text" id="phone-input" value={data.phone} onChange={(e) => onTextChange("phone", e)} />
-          <label htmlFor="email-input">Email</label>
-          <input type="text" id="email-input" value={data.email} onChange={(e) => onTextChange("email", e)} />
-          <label htmlFor="website-input">Website</label>
-          <input type="text" id="website-input" value={data.website} onChange={(e) => onTextChange("website", e)} />
-        </fieldset>
+        <div className="entry">
+          <div className="entry-content">
+            <fieldset>
+              <label htmlFor="phone-input">Phone</label>
+              <input type="text" id="phone-input" value={data.phone} onChange={(e) => onTextChange("phone", e)} />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="email-input">Email</label>
+              <input type="text" id="email-input" value={data.email} onChange={(e) => onTextChange("email", e)} />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="website-input">Website</label>
+              <input type="text" id="website-input" value={data.website} onChange={(e) => onTextChange("website", e)} />
+            </fieldset>
+          </div>
+        </div>
       </Panel>
     </>
   )
@@ -169,7 +186,7 @@ function Entry({ id, data, name, type, index, isDescription = false, onChange })
 
   const head = {
     header: <>
-      <button className="collapse show" onClick={toggleVisibility}></button>
+      <button className={visibility ? "collapse show" : "collapse"} onClick={toggleVisibility}></button>
       <button className="settings" onClick={() => setIsConfirmDelete(!isConfirmDelete)}></button>
     </>,
     content: <>

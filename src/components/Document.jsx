@@ -20,7 +20,7 @@ export default function Document({ color, data }) {
     <div className="document" >
       <aside style={{ "--aside-color": color }}>
         <div className="avatar" style={avatar ? { backgroundImage: `url("${avatar}")` } : null}>
-          <label htmlFor="imageInput"></label>
+          <label htmlFor="imageInput"><span>Upload Image</span></label>
           <input type="file" id="imageInput" accept='image/' onChange={(event) => handleImageUpload(event)} />
         </div>
         <Contact data={data.user}></Contact>
