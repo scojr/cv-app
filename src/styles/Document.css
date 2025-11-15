@@ -1,4 +1,5 @@
 .document {
+  --font-size: 1.6vh;
   --accent-color: #5f8fbb;
   aspect-ratio: 1 / 1.284;
   height: 100vh;
@@ -7,7 +8,7 @@
 
   display: grid;
   grid-template-columns: 35% 1fr;
-  gap: 1rem;
+  gap: 1em;
   font-size: var(--font-size);
   overflow: hidden;
   position: sticky;
@@ -16,78 +17,78 @@
 
 aside {
   --aside-color: #5f8fbb;
-  padding: 2rem;
+  padding: 2em;
   background-color: var(--aside-color);
   color: white;
 
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.8em;
     border-bottom: 1px solid white;
   }
 
   section {
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
 
     h3 {
       font-size: calc(var(--font-size) * 1.4);
       font-weight: bold;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.5em;
     }
   }
 
   .separator {
     border-bottom: 1px solid white;
-    width: calc(100% - 1rem);
-    margin-left: 0rem;
+    width: calc(100% - 1em);
+    margin-left: 0em;
   }
 }
 
 main {
-  padding: 1rem;
+  padding: 1em;
   padding-left: 0;
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.8em;
     border-bottom: 1px solid var(--accent-color);
   }
 
   header {
     h1 {
-      font-size: 3.4rem;
+      font-size: 3.4em;
     }
 
     h2 {
-      font-size: 1.6rem;
+      font-size: 1.6em;
       border-bottom: none;
     }
 
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
   }
 
   section {
-    margin-top: 1rem;
+    margin-top: 1em;
 
     h2 {
-      margin-bottom: 1rem;
+      margin-bottom: 1em;
     }
   }
 
   p {
-    margin-top: 0.5rem;
+    margin-top: 0.5em;
   }
 
   .separator {
     border-bottom: 1px solid black;
-    width: calc(100% - 1rem);
-    margin-left: 0rem;
+    width: calc(100% - 1em);
+    margin-left: 0em;
   }
 }
 
 .entry {
 
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.2em;
     font-weight: bold;
   }
 
@@ -98,18 +99,18 @@ main {
   }
 
   h3 {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.25em;
   }
 
   p {
-    margin-top: 0.25rem;
+    margin-top: 0.25em;
   }
 
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
 }
 
 section {
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
 }
 
 aside,
@@ -118,21 +119,23 @@ main {
     list-style: initial;
 
     li {
-      margin: 0.5rem 1rem;
+      margin: 0.5em 1em;
     }
   }
 }
 
 
 .avatar {
+  min-height: 0%;
   aspect-ratio: 1/1;
   border-radius: 100%;
   background-color: rgb(221, 221, 221);
   background-image: url('../assets/avatar-placeholder.jpg');
   background-position: center;
+  background-repeat: no-repeat;
   background-size: contain;
-  border: 0.25rem solid white;
-  margin-bottom: 2rem;
+  border: 0.25em solid white;
+  margin-bottom: 2em;
   position: relative;
 
   input {
@@ -145,7 +148,7 @@ main {
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    font-size: 1rem;
+    font-size: 1em;
   }
 
   label {
